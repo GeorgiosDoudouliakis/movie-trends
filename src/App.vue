@@ -11,6 +11,7 @@
   }
 
   body {
+    @apply bg-lighter-black;
     min-height: 100vh;
   }
 
