@@ -7,7 +7,11 @@ module.exports = {
       'secondary': '#fcfcfc',
       'lighter-black': '#0f1219'
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Lato', 'sans-serif']
+      }
+    },
   },
   plugins: [],
 }
