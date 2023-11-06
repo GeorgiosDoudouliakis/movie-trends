@@ -51,4 +51,10 @@
   main {
     min-height: calc(100vh - 109px);
   }
+
+  // Reusable classes
+  .btn-primary {
+    color: var(--lighter-black-color);
+    background: var(--primary-color);
+  }
 </style>
