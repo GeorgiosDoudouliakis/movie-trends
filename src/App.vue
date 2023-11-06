@@ -47,4 +47,8 @@
     display: inline-block;
     text-decoration: none;
   }
+
+  main {
+    min-height: calc(100vh - 109px);
+  }
 </style>
