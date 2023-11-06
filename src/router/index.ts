@@ -7,23 +7,37 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: HomeView
+    component: HomeView,
+    meta: {
+      title: 'Home'
+    }
   },
   {
     path: '/movies',
     name: 'Movies',
-    component: MoviesView
+    component: MoviesView,
+    meta: {
+      title: 'Movies'
+    }
   },
   {
     path: '/tv-series',
     name: 'TvSeries',
-    component: TvSeriesView
+    component: TvSeriesView,
+    meta: {
+      title: 'Tv Series'
+    }
   }
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = `${to.meta.title} | MovieTrends`;
+  next();
 });
 
 export default router;
