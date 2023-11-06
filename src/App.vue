@@ -1,12 +1,24 @@
 <template>
+  <TheHeader/>
+  <main>
+    <router-view />
+  </main>
   <TheFooter/>
 </template>
 
 <script setup lang="ts">
+  import TheHeader from "@/components/TheHeader.vue";
   import TheFooter from "@/components/TheFooter.vue";
 </script>
 
 <style lang="scss">
+  :root {
+    --primary-color: #20ffe8;
+    --secondary-color: #fcfcfc;
+    --lighter-black-color: #0f1219;
+    --header-border-color: #3b4046;
+  }
+
   * {
     box-sizing: border-box;
     padding: 0;
