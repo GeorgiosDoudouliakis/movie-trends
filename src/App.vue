@@ -57,4 +57,11 @@
     color: var(--lighter-black-color);
     background: var(--primary-color);
   }
+
+  .responsive-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 </style>
