@@ -50,8 +50,9 @@
   const isOnMobile = ref<boolean>(window.matchMedia('(max-width: 767px)').matches);
   const isMobileMenuActive = ref<boolean>(false);
 
-  const updateMobileStatus = () => {
+  const updateMobileRelatedState = () => {
     isOnMobile.value = window.matchMedia('(max-width: 767px)').matches;
+    isMobileMenuActive.value = false;
   };
 
   const toggleMobileMenu = () => {
@@ -62,9 +63,9 @@
     isMobileMenuActive.value = false;
   };
 
-  onMounted(() => window.addEventListener("resize",() => updateMobileStatus()));
+  onMounted(() => window.addEventListener("resize",() => updateMobileRelatedState()));
 
-  onUnmounted(() => window.removeEventListener("resize", updateMobileStatus));
+  onUnmounted(() => window.removeEventListener("resize", updateMobileRelatedState));
 </script>
 
 <style scoped lang="scss">
