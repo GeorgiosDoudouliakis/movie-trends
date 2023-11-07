@@ -13,6 +13,7 @@
 
 <style scoped lang="scss">
   input {
+    width: 130px;
     color: var(--primary-color);
     background: lighten(#0f1219, 15%);
     outline: 2px solid lighten(#0f1219, 15%);
