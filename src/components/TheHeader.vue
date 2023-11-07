@@ -13,13 +13,13 @@
           <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg px-5 py-4">Tv Series</router-link>
         </li>
       </ul>
-      <TheSearchInput />
+      <TheHeaderSearch />
     </nav>
   </header>
 </template>
 
 <script setup lang="ts">
-  import TheSearchInput from "@/components/TheSearchInput.vue";
+  import TheHeaderSearch from "@/components/TheHeaderSearch.vue";
 </script>
 
 <style scoped lang="scss">
