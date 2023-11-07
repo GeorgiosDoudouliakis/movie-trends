@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center">
     <input v-model="searchTerm" type="text" placeholder="Search term..." class="text-sm p-2"/>
-    <button class="btn-primary p-2">GO</button>
+    <button class="text-sm btn-primary p-2">GO</button>
   </div>
 </template>
 
@@ -16,10 +16,14 @@
     width: 130px;
     color: var(--primary-color);
     background: lighten(#0f1219, 15%);
-    outline: 2px solid lighten(#0f1219, 15%);
+    outline: 1px solid lighten(#0f1219, 15%);
 
     &:focus {
-      outline: 1px solid var(--primary-color);
+      outline-color: var(--primary-color);
     }
+  }
+
+  button {
+    outline: 1px solid var(--primary-color);
   }
 </style>
