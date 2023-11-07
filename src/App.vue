@@ -16,7 +16,7 @@
     --primary-color: #20ffe8;
     --secondary-color: #fcfcfc;
     --lighter-black-color: #0f1219;
-    --header-border-color: #3b4046;
+    --border-color: #3b4046;
   }
 
   * {
