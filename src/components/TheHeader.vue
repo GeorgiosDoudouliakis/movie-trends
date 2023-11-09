@@ -4,7 +4,7 @@
       <h1 class="text-lg font-semibold tracking-widest">MOVIETRENDS</h1>
 
       <div v-if="isOnMobile" class="mobile-menu-icon flex flex-col justify-between cursor-pointer"
-        :class="{ 'open': isMobileMenuActive }" @click="toggleMobileMenu">
+        :class="{ 'open': isMobileMenuActive }" @click="handleMobileMenu">
           <div class="w-full bg-primary"></div>
           <div class="w-full bg-primary"></div>
           <div class="w-full bg-primary"></div>
@@ -28,13 +28,13 @@
       <div v-if="isOnMobile" class="flex flex-col justify-center items-center mobile-menu" :class="{ 'mobile-menu-active': isMobileMenuActive }">
         <ul class="flex flex-col items-center mb-8">
           <li>
-            <router-link :to="{ name: 'Home' }" class="text-secondary text-lg p-4" @click="closeMobileMenu">Home</router-link>
+            <router-link :to="{ name: 'Home' }" class="text-secondary text-lg p-4" @click="handleMobileMenu">Home</router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'Movies' }" class="text-secondary text-lg p-4" @click="closeMobileMenu">Movies</router-link>
+            <router-link :to="{ name: 'Movies' }" class="text-secondary text-lg p-4" @click="handleMobileMenu">Movies</router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4" @click="closeMobileMenu">Tv Series</router-link>
+            <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4" @click="handleMobileMenu">Tv Series</router-link>
           </li>
         </ul>
         <TheHeaderSearch />
@@ -55,12 +55,9 @@
     isMobileMenuActive.value = false;
   };
 
-  const toggleMobileMenu = () => {
+  const handleMobileMenu = () => {
     isMobileMenuActive.value = !isMobileMenuActive.value;
-  };
-
-  const closeMobileMenu = () => {
-    isMobileMenuActive.value = false;
+    document.body.style.overflow = isMobileMenuActive.value ? "hidden" : "auto";
   };
 
   onMounted(() => window.addEventListener("resize",() => updateMobileRelatedState()));
@@ -99,9 +96,8 @@
     left: 0;
     width: 0;
     opacity: 0;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 61px);
     background: darken(#0f1219, 15%);
-    border-bottom: 1px solid var(--border-color);
     z-index: -1;
     transition: all .5s;
 
