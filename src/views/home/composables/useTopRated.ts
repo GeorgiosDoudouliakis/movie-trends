@@ -5,7 +5,7 @@ export function useTopRated() {
     const loading = ref<boolean>(true);
     const items = ref<CarouselItemModel[]>([]);
 
-    const fetchTopRatedMovies = async (type: "movie" | "tv") => {
+    const fetchTopRatedItems = async (type: "movie" | "tv") => {
         try {
             const req = await fetch(`https://api.themoviedb.org/3/${type}/top_rated?api_key=803a77b2748b6f5d6363b4fa92bfd870&page=1`);
             const res: TopRatedTvSeriesResponse = await req.json();
@@ -26,5 +26,5 @@ export function useTopRated() {
         }
     };
 
-    return { items, fetchTopRatedMovies };
+    return { items, fetchTopRatedItems };
 }

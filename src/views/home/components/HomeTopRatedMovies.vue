@@ -7,7 +7,7 @@
   import BaseTopRated from "@/views/home/components/BaseTopRated.vue";
   import { useTopRated } from "@/views/home/composables/useTopRated";
 
-  const { items, fetchTopRatedMovies } = useTopRated();
+  const { items, fetchTopRatedItems } = useTopRated();
 
-  onMounted(() => fetchTopRatedMovies("movie"));
+  onMounted(() => fetchTopRatedItems("movie"));
 </script>
