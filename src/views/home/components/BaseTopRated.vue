@@ -2,7 +2,7 @@
   <div class="w-full p-8">
     <h2 class="text-2xl mb-8 text-secondary">Top Rated {{ itemsType }}</h2>
 
-    <carousel :items-to-show="1">
+    <carousel :items-to-show="itemsToShow">
       <slide v-for="item in items" :key="item.id">
         <div class="item-container relative">
           <img class="responsive-img" :src="item.image" :alt="item.title + 'poster'">
@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-  import { PropType } from "vue";
+  import { ref, onBeforeMount, PropType } from "vue";
   import 'vue3-carousel/dist/carousel.css'
   import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
   import { CarouselItemModel } from "@/views/home/interfaces";
@@ -37,6 +37,30 @@
       required: true
     }
   });
+
+  const itemsToShow = ref<number>(1);
+
+  const defineNumberOfItemsToShow = () => {
+    if (window.matchMedia("(max-width: 559px)").matches) {
+      itemsToShow.value = 1;
+    } else if (window.matchMedia("(min-width: 560px) and (max-width: 679px)").matches) {
+      itemsToShow.value = 2;
+    } else if (window.matchMedia("(min-width: 680px) and (max-width: 999px)").matches) {
+      itemsToShow.value = 3;
+    } else if (window.matchMedia("(min-width: 1000px) and (max-width: 1279px)").matches) {
+      itemsToShow.value = 4;
+    } else if (window.matchMedia("(min-width: 1280px) and (max-width: 1439px)").matches) {
+      itemsToShow.value = 5;
+    } else if (window.matchMedia("(min-width: 1440px) and (max-width: 1699px)").matches) {
+      itemsToShow.value = 6;
+    } else if (window.matchMedia("(min-width: 1700px) and (max-width: 1899px)").matches) {
+      itemsToShow.value = 7;
+    } else {
+      itemsToShow.value = 8;
+    }
+  };
+
+  onBeforeMount(() => defineNumberOfItemsToShow());
 </script>
 
 <style scoped lang="scss">
