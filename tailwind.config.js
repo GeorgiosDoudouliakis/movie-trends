@@ -9,7 +9,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Lato', 'sans-serif']
+        sans: ['Noto Sans Mono', 'monospace']
       }
     },
   },
