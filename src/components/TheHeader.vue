@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, onUnmounted, ref } from "vue";
+  import { onBeforeUnmount, onMounted, ref } from "vue";
   import TheHeaderSearch from "@/components/TheHeaderSearch.vue";
 
   const isOnMobile = ref<boolean>(window.matchMedia('(max-width: 767px)').matches);
@@ -65,7 +65,7 @@
 
   onMounted(() => window.addEventListener("resize",() => updateMobileRelatedState()));
 
-  onUnmounted(() => window.removeEventListener("resize", updateMobileRelatedState));
+  onBeforeUnmount(() => window.removeEventListener("resize", updateMobileRelatedState));
 </script>
 
 <style scoped lang="scss">
