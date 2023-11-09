@@ -2,22 +2,28 @@
   <div class="w-full px-8 py-12">
     <h2 class="text-2xl mb-10 text-secondary">Top Rated {{ itemsType }}</h2>
 
-    <carousel :items-to-show="itemsToShow">
-      <slide v-for="item in items" :key="item.id">
-        <div class="item-container relative">
-          <img class="responsive-img" :src="item.image" :alt="item.title + 'poster'" width="185" height="278">
-          <div class="absolute left-0 bottom-0 p-3 w-full">
-            <h3 class="font-bold text-secondary">{{ item.title }}</h3>
+    <template v-if="!loading">
+      <carousel :items-to-show="itemsToShow">
+        <slide v-for="item in items" :key="item.id">
+          <div class="item-container relative">
+            <img class="responsive-img" :src="item.image" :alt="item.title + 'poster'" width="185" height="278">
+            <div class="absolute left-0 bottom-0 p-3 w-full">
+              <h3 class="font-bold text-secondary">{{ item.title }}</h3>
+            </div>
+            <span class="absolute p-2">{{ item.rate }}</span>
           </div>
-          <span class="absolute p-2">{{ item.rate }}</span>
-        </div>
-      </slide>
+        </slide>
 
-      <template #addons>
-        <navigation />
-        <pagination />
-      </template>
-    </carousel>
+        <template #addons>
+          <navigation />
+          <pagination />
+        </template>
+      </carousel>
+    </template>
+
+    <div v-else class="flex justify-center items-center loader-container">
+      <BaseLoader />
+    </div>
   </div>
 </template>
 
@@ -26,6 +32,7 @@
   import 'vue3-carousel/dist/carousel.css'
   import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
   import { CarouselItemModel } from "@/views/home/interfaces";
+  import BaseLoader from "@/components/BaseLoader.vue";
 
   defineProps({
     itemsType: {
@@ -34,6 +41,10 @@
     },
     items: {
       type: Array as PropType<CarouselItemModel[]>,
+      required: true
+    },
+    loading: {
+      type: Boolean,
       required: true
     }
   });
@@ -97,5 +108,10 @@
       border-top-right-radius: 10px;
       border-bottom-left-radius: 10px;
     }
+  }
+
+  .loader-container {
+    width: 100%;
+    height: 278px;
   }
 </style>
