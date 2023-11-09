@@ -1,6 +1,6 @@
 <template>
   <div class="w-full px-8 py-12">
-    <h2 class="text-2xl mb-10 text-secondary">Top Rated {{ itemsType }}</h2>
+    <h2 class="text-xl mb-10 text-secondary">Top Rated {{ itemsType }}</h2>
 
     <template v-if="!loading">
       <carousel :items-to-show="itemsToShow">

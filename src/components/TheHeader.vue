@@ -1,7 +1,7 @@
 <template>
   <header :class="{ 'py-4': isOnMobile }" class="px-8 relative">
     <nav class="flex justify-between items-center">
-      <h1 class="text-lg font-semibold tracking-widest">MOVIETRENDS</h1>
+      <h1 class="text-2xl font-semibold tracking-widest">MOVIETRENDS</h1>
 
       <div v-if="isOnMobile" class="mobile-menu-icon flex flex-col justify-between cursor-pointer"
         :class="{ 'open': isMobileMenuActive }" @click="handleMobileMenu">
