@@ -64,4 +64,23 @@
     object-fit: cover;
     object-position: center;
   }
+
+  // Carousel style overwrites
+  .carousel__prev,
+  .carousel__next {
+    background-color: var(--primary-color) !important;
+  }
+
+  .carousel__prev > svg,
+  .carousel__next > svg {
+    fill: var(--lighter-black-color);
+  }
+
+  .carousel__pagination {
+    display: none !important;
+  }
+
+  .carousel_slide {
+    align-items: unset;
+  }
 </style>
