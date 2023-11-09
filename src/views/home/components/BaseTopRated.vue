@@ -1,11 +1,11 @@
 <template>
-  <div class="w-full p-8">
-    <h2 class="text-2xl mb-8 text-secondary">Top Rated {{ itemsType }}</h2>
+  <div class="w-full px-8 py-12">
+    <h2 class="text-2xl mb-10 text-secondary">Top Rated {{ itemsType }}</h2>
 
     <carousel :items-to-show="itemsToShow">
       <slide v-for="item in items" :key="item.id">
         <div class="item-container relative">
-          <img class="responsive-img" :src="item.image" :alt="item.title + 'poster'">
+          <img class="responsive-img" :src="item.image" :alt="item.title + 'poster'" width="185" height="278">
           <div class="absolute left-0 bottom-0 p-3 w-full">
             <h3 class="font-bold text-secondary">{{ item.title }}</h3>
           </div>
@@ -64,6 +64,19 @@
 </script>
 
 <style scoped lang="scss">
+  h2 {
+    text-align: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+    border-right: 5px solid var(--primary-color);
+    border-left: 5px solid var(--primary-color);
+
+    @media (min-width: 768px) {
+      text-align: left;
+    }
+  }
+
   .item-container {
     > img {
       border-radius: 10px;
