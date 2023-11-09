@@ -6,8 +6,25 @@
   import { onMounted } from "vue";
   import BaseTopRated from "@/views/home/components/BaseTopRated.vue";
   import { useTopRated } from "@/views/home/composables/useTopRated";
+  import { TopRatedTvSerie, TopRatedTvSeriesResponse } from "@/views/home/interfaces";
 
-  const { items, fetchTopRatedItems } = useTopRated();
+  const { items, loading, topRatedItems$ } = useTopRated<TopRatedTvSeriesResponse, TopRatedTvSerie>();
 
-  onMounted(() => fetchTopRatedItems("tv"));
+  onMounted(() => {
+    topRatedItems$("tv")
+        .then((tvSeries: TopRatedTvSerie[]) => {
+          tvSeries.forEach((tvSerie: TopRatedTvSerie) => {
+            items.value.push({
+              id: tvSerie.id,
+              title: tvSerie.name,
+              rate: +Number.parseFloat(tvSerie.vote_average.toString()).toFixed(1),
+              image: `https://image.tmdb.org/t/p/w185/${tvSerie.poster_path}`
+            });
+          });
+        })
+        .catch((err) => {
+          console.error(err.message);
+        })
+        .finally(() => loading.value = false)
+  });
 </script>
