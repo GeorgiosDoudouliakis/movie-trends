@@ -19,6 +19,18 @@
     --border-color: #3b4046;
   }
 
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #fff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+  }
+
   * {
     box-sizing: border-box;
     padding: 0;
