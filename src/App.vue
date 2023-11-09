@@ -49,7 +49,11 @@
   }
 
   main {
-    min-height: calc(100vh - 109px);
+    min-height: calc(100vh - 113px);
+
+    @media(min-width: 768px) {
+      min-height: calc(100vh - 109px);
+    }
   }
 
   // Reusable classes

@@ -96,7 +96,7 @@
     left: 0;
     width: 0;
     opacity: 0;
-    height: calc(100vh - 61px);
+    height: calc(100vh - 65px);
     background: darken(#0f1219, 15%);
     z-index: -1;
     transition: all .5s;
