@@ -1,5 +1,5 @@
 <template>
-  <BaseTopRated items-type="Tv Series" :items="items" :loading="loading" />
+  <BaseTopRated items-type="Tv Series" :items="items" :loading="loading" btn-path="tv-series" />
 </template>
 
 <script setup lang="ts">

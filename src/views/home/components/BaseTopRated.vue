@@ -1,6 +1,9 @@
 <template>
   <div class="w-full px-8 py-12">
-    <h2 class="text-xl mb-10 text-secondary">Top Rated {{ itemsType }}</h2>
+    <div class="flex justify-between items-center mb-10">
+      <h2 class="text-lg text-secondary">Top Rated {{ itemsType }}</h2>
+      <button class="btn-secondary"><router-link :to="btnPath">All {{ itemsType }}</router-link></button>
+    </div>
 
     <template v-if="!loading">
       <carousel :items-to-show="itemsToShow">
@@ -46,6 +49,10 @@
     loading: {
       type: Boolean,
       required: true
+    },
+    btnPath: {
+      type: String as PropType<"movies" | "tv-series">,
+      required: true
     }
   });
 
@@ -75,19 +82,6 @@
 </script>
 
 <style scoped lang="scss">
-  h2 {
-    text-align: center;
-    padding: 10px 15px;
-    border-bottom: 1px solid var(--border-color);
-    border-top: 1px solid var(--border-color);
-    border-right: 5px solid var(--primary-color);
-    border-left: 5px solid var(--primary-color);
-
-    @media (min-width: 768px) {
-      text-align: left;
-    }
-  }
-
   .item-container {
     > img {
       border-radius: 10px;
