@@ -15,12 +15,12 @@
             <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4">Tv Series</router-link>
           </li>
         </ul>
-        <button class="btn-primary btn-search"><router-link to="/" class="text-lg p-4" @click="handleMobileMenu">Search</router-link></button>
+        <button class="btn-primary btn-search"><router-link to="/" class="text-lg p-4" @click="handleMobileMenuVisibility">Search</router-link></button>
       </template>
 
       <!--  Mobile  -->
       <div v-if="isOnMobile" class="mobile-menu-icon flex flex-col justify-between cursor-pointer"
-           :class="{ 'open': isMobileMenuActive }" @click="handleMobileMenu">
+           :class="{ 'open': isMobileMenuActive }" @click="handleMobileMenuVisibility">
         <div class="w-full bg-primary"></div>
         <div class="w-full bg-primary"></div>
         <div class="w-full bg-primary"></div>
@@ -29,16 +29,16 @@
       <div v-if="isOnMobile" class="flex flex-col justify-center items-center mobile-menu" :class="{ 'mobile-menu-active': isMobileMenuActive }">
         <ul class="flex flex-col items-center mb-4">
           <li>
-            <router-link :to="{ name: 'Home' }" class="text-secondary text-lg p-4" @click="handleMobileMenu">Home</router-link>
+            <router-link :to="{ name: 'Home' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">Home</router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'Movies' }" class="text-secondary text-lg p-4" @click="handleMobileMenu">Movies</router-link>
+            <router-link :to="{ name: 'Movies' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">Movies</router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4" @click="handleMobileMenu">Tv Series</router-link>
+            <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">Tv Series</router-link>
           </li>
         </ul>
-        <button class="btn-primary"><router-link to="/" class="text-lg" @click="handleMobileMenu">Search</router-link></button>
+        <button class="btn-primary"><router-link to="/" class="text-lg" @click="handleMobileMenuVisibility">Search</router-link></button>
       </div>
     </nav>
   </header>
@@ -55,7 +55,7 @@
     isMobileMenuActive.value = false;
   };
 
-  const handleMobileMenu = () => {
+  const handleMobileMenuVisibility = () => {
     isMobileMenuActive.value = !isMobileMenuActive.value;
     document.body.style.overflow = isMobileMenuActive.value ? "hidden" : "auto";
   };
