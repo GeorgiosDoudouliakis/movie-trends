@@ -60,6 +60,12 @@
     text-decoration: none;
   }
 
+  button > a {
+    font-size: 14px;
+    display: inline-block;
+    padding: 5px 10px;
+  }
+
   main {
     min-height: calc(100vh - 113px);
 
@@ -72,6 +78,25 @@
   .btn-primary {
     color: var(--lighter-black-color);
     background: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    transition: .4s ease-in-out;
+
+    &:hover {
+      color: var(--primary-color);
+      background: var(--lighter-black-color);
+    }
+  }
+
+  .btn-secondary {
+    color: var(--primary-color);
+    background: var(--lighter-black-color);
+    border: 1px solid var(--primary-color);
+    transition: .4s ease-in-out;
+
+    &:hover {
+      color: var(--lighter-black-color);
+      background: var(--primary-color);
+    }
   }
 
   .responsive-img {
