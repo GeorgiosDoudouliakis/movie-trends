@@ -3,13 +3,6 @@
     <nav class="flex justify-between items-center">
       <h1 class="text-2xl font-semibold tracking-widest">MOVIETRENDS</h1>
 
-      <div v-if="isOnMobile" class="mobile-menu-icon flex flex-col justify-between cursor-pointer"
-        :class="{ 'open': isMobileMenuActive }" @click="handleMobileMenu">
-          <div class="w-full bg-primary"></div>
-          <div class="w-full bg-primary"></div>
-          <div class="w-full bg-primary"></div>
-      </div>
-
       <template v-if="!isOnMobile">
         <ul class="flex">
           <li>
@@ -22,11 +15,19 @@
             <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4">Tv Series</router-link>
           </li>
         </ul>
-        <TheHeaderSearch />
+        <button class="btn-primary btn-search"><router-link to="/" class="text-lg p-4" @click="handleMobileMenu">Search</router-link></button>
       </template>
 
+      <!--  Mobile  -->
+      <div v-if="isOnMobile" class="mobile-menu-icon flex flex-col justify-between cursor-pointer"
+           :class="{ 'open': isMobileMenuActive }" @click="handleMobileMenu">
+        <div class="w-full bg-primary"></div>
+        <div class="w-full bg-primary"></div>
+        <div class="w-full bg-primary"></div>
+      </div>
+
       <div v-if="isOnMobile" class="flex flex-col justify-center items-center mobile-menu" :class="{ 'mobile-menu-active': isMobileMenuActive }">
-        <ul class="flex flex-col items-center mb-8">
+        <ul class="flex flex-col items-center mb-4">
           <li>
             <router-link :to="{ name: 'Home' }" class="text-secondary text-lg p-4" @click="handleMobileMenu">Home</router-link>
           </li>
@@ -37,7 +38,7 @@
             <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4" @click="handleMobileMenu">Tv Series</router-link>
           </li>
         </ul>
-        <TheHeaderSearch />
+        <button class="btn-primary"><router-link to="/" class="text-lg" @click="handleMobileMenu">Search</router-link></button>
       </div>
     </nav>
   </header>
@@ -45,7 +46,6 @@
 
 <script setup lang="ts">
   import { onBeforeUnmount, onMounted, ref } from "vue";
-  import TheHeaderSearch from "@/components/TheHeaderSearch.vue";
 
   const isOnMobile = ref<boolean>(window.matchMedia('(max-width: 767px)').matches);
   const isMobileMenuActive = ref<boolean>(false);
@@ -68,6 +68,10 @@
 <style scoped lang="scss">
   header {
     border-bottom: 1px solid var(--border-color);
+  }
+
+  .btn-search {
+    width: 170px;
   }
 
   .mobile-menu-icon {
@@ -108,7 +112,7 @@
     }
   }
 
-  .router-link-exact-active {
+  .router-link-exact-active:not(button > a) {
     @apply text-primary;
     position: relative;
 
