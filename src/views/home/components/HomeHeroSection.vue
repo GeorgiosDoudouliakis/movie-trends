@@ -14,7 +14,7 @@
 
     > div {
       content: "";
-      background: rgba(0, 0, 0, .8);
+      background: rgba(0, 0, 0, .7);
 
       > p {
         @media(min-width: 700px) {
