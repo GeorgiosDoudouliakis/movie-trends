@@ -17,6 +17,7 @@
             items.value.push({
               id: tvSerie.id,
               title: tvSerie.name,
+              description: tvSerie.overview,
               rate: +Number.parseFloat(tvSerie.vote_average.toString()).toFixed(1),
               image: `https://image.tmdb.org/t/p/w185/${tvSerie.poster_path}`
             });
