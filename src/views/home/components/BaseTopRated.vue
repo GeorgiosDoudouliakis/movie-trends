@@ -34,7 +34,7 @@
   import { ref, onBeforeMount, PropType } from "vue";
   import 'vue3-carousel/dist/carousel.css'
   import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-  import { CarouselItemModel } from "@/views/home/interfaces";
+  import { TopRatedItemModel } from "@/views/home/interfaces";
   import BaseLoader from "@/components/BaseLoader.vue";
 
   defineProps({
@@ -43,7 +43,7 @@
       required: true
     },
     items: {
-      type: Array as PropType<CarouselItemModel[]>,
+      type: Array as PropType<TopRatedItemModel[]>,
       required: true
     },
     loading: {
