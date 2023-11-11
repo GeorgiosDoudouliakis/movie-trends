@@ -8,13 +8,7 @@
     <template v-if="!loading">
       <carousel :items-to-show="itemsToShow">
         <slide v-for="item in items" :key="item.id">
-          <div class="item-container relative">
-            <img class="responsive-img" :src="item.image" :alt="item.title + 'poster'" width="185" height="278">
-            <div class="absolute left-0 bottom-0 p-3 w-full">
-              <h3 class="font-bold text-secondary">{{ item.title }}</h3>
-            </div>
-            <span class="absolute p-2">{{ item.rate }}</span>
-          </div>
+          <BaseTopRatedItem :item="item" />
         </slide>
 
         <template #addons>
@@ -36,6 +30,7 @@
   import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
   import { TopRatedItemModel } from "@/views/home/interfaces";
   import BaseLoader from "@/components/BaseLoader.vue";
+  import BaseTopRatedItem from "@/views/home/components/BaseTopRatedItem.vue";
 
   defineProps({
     itemsType: {
@@ -82,28 +77,6 @@
 </script>
 
 <style scoped lang="scss">
-  .item-container {
-    > img {
-      border-radius: 10px;
-    }
-
-    > div {
-      content: "";
-      background-color: rgba(0, 0, 0, .9);
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-    }
-
-    > span {
-      top: 0;
-      right: 0;
-      color: var(--lighter-black-color);
-      background: var(--primary-color);
-      border-top-right-radius: 10px;
-      border-bottom-left-radius: 10px;
-    }
-  }
-
   .loader-container {
     width: 100%;
     height: 278px;

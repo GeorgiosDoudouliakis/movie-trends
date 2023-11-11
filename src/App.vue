@@ -41,6 +41,7 @@
   body {
     @apply bg-lighter-black;
     min-height: 100vh;
+    position: relative;
   }
 
   h1, h2, h3, h4 {
