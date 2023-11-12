@@ -15,7 +15,6 @@
             <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4">Tv Series</router-link>
           </li>
         </ul>
-        <button class="btn-primary btn-search"><router-link to="/" class="text-lg p-4" @click="handleMobileMenuVisibility">Search</router-link></button>
       </template>
 
       <!--  Mobile  -->
@@ -27,7 +26,7 @@
       </div>
 
       <div v-if="isOnMobile" class="flex flex-col justify-center items-center mobile-menu" :class="{ 'mobile-menu-active': isMobileMenuActive }">
-        <ul class="flex flex-col items-center mb-4">
+        <ul class="flex flex-col items-center">
           <li>
             <router-link :to="{ name: 'Home' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">Home</router-link>
           </li>
@@ -38,7 +37,6 @@
             <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">Tv Series</router-link>
           </li>
         </ul>
-        <button class="btn-primary"><router-link to="/" class="text-lg" @click="handleMobileMenuVisibility">Search</router-link></button>
       </div>
     </nav>
   </header>
@@ -68,10 +66,6 @@
 <style scoped lang="scss">
   header {
     border-bottom: 1px solid var(--border-color);
-  }
-
-  .btn-search {
-    width: 170px;
   }
 
   .mobile-menu-icon {
@@ -112,7 +106,7 @@
     }
   }
 
-  .router-link-exact-active:not(button > a) {
+  .router-link-exact-active {
     @apply text-primary;
     position: relative;
 
