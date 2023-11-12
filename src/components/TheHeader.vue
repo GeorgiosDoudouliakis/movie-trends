@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ 'py-4': isOnMobile }" class="px-8 relative">
+  <header :class="{ 'py-4': isOnMobile }" class="wrapper relative">
     <nav class="flex justify-between items-center">
       <h1 class="text-2xl font-semibold tracking-widest">MOVIETRENDS</h1>
 
@@ -64,10 +64,6 @@
 </script>
 
 <style scoped lang="scss">
-  header {
-    border-bottom: 1px solid var(--border-color);
-  }
-
   .mobile-menu-icon {
     width: 30px;
     height: 20px;

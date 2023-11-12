@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full px-8 py-12">
+  <div class="py-12 wrapper">
     <div class="flex justify-between items-center mb-10">
       <h2 class="text-lg text-secondary">Top Rated {{ itemsType }}</h2>
       <button class="btn-secondary"><router-link :to="btnPath">Show All</router-link></button>

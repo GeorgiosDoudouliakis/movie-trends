@@ -33,13 +33,13 @@
   .overlay {
     content: "";
     background: rgba(0, 0, 0, .7);
-    z-index: 2;
+    z-index: 10;
 
     > .modal {
       width: 90%;
       background: var(--secondary-color);
       border-radius: 10px;
-      z-index: 5;
+      z-index: 15;
 
       > p {
         max-height: 400px;

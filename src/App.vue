@@ -56,10 +56,20 @@
   }
 
   main {
-    min-height: calc(100vh - 113px);
+    min-height: calc(100vh - 112px);
+
+    @media(min-width: 1024px) {
+      min-height: calc(100vh - 108px);
+    }
   }
 
   // Reusable classes
+  .wrapper {
+    width: 90%;
+    max-width: 1280px;
+    margin: auto;
+  }
+
   .btn-primary {
     color: var(--lighter-black-color);
     background: var(--primary-color);

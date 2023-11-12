@@ -1,5 +1,5 @@
 <template>
-  <footer class="text-center text-base py-3">
+  <footer class="text-center text-base py-3 wrapper">
     <p>Copyright &copy; {{ currentDate }}. All Rights Reserved.</p>
   </footer>
 </template>

@@ -1,10 +1,10 @@
 <template>
   <div class="relative w-full hero-section-container">
-    <img class="absolute top-0 left-0 responsive-img" src="../../../assets/hero_img.jpg" alt="">
-    <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-center px-8">
+    <div class="absolute top-0 left-0 w-full h-full back"></div>
+    <div class="relative flex flex-col justify-center h-full wrapper hero-section-content">
       <span class="text-2xl text-primary mb-4">WELCOME TO MOVIETRENDS!</span>
       <p class="text-xl mb-6">Explore movies, tv series and details for them from anywhere and anytime</p>
-      <div class="flex">
+      <div class="flex search-container">
         <input type="text" placeholder="Search for movies, tv series and persons..." v-model="searchTerm" />
         <button class="btn-primary">
           <router-link to="/">Search</router-link>
@@ -23,12 +23,19 @@
 <style scoped lang="scss">
   .hero-section-container {
     height: 300px;
+    background-image: url("../../../assets/hero_img.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
 
-    > div:first-of-type {
+    > .back {
       content: "";
       background: rgba(0, 0, 0, .7);
+    }
 
-      > div {
+    > .hero-section-content {
+      z-index: 5;
+
+      > .search-container {
         width: 100%;
         max-width: 1280px;
 
