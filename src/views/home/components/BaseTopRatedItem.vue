@@ -1,5 +1,5 @@
 <template>
-  <div class="item-container relative">
+  <div class="item-container relative shrink-0">
     <div class="absolute cursor-pointer p-2 more-icon-container">
       <svg width="30px" height="30px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none" @click="showDescription">
         <path fill="#20ffe8" fill-rule="evenodd" d="M12 3a2 2 0 10-4 0 2 2 0 004 0zm-2 5a2 2 0 110 4 2 2 0 010-4zm0 7a2 2 0 110 4 2 2 0 010-4z"/>
@@ -8,7 +8,7 @@
     <span class="absolute p-2">{{ item.rate }}</span>
     <img class="responsive-img" :src="item.image" :alt="item.title + 'poster'" width="185" height="278">
     <div class="absolute left-0 bottom-0 p-3 w-full title-container">
-      <h3 class="font-bold text-secondary">{{ item.title }}</h3>
+      <h3 class="font-bold text-center text-secondary">{{ item.title }}</h3>
     </div>
   </div>
 
@@ -44,13 +44,10 @@
 </script>
 
 <style scoped lang="scss">
-  .more-icon-container {
-    background: rgba(0, 0, 0, .7);
-    border-top-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-
   .item-container {
+    width: 185px;
+    height: 278px;
+
     > img {
       border-radius: 10px;
     }
@@ -70,5 +67,11 @@
       border-top-right-radius: 10px;
       border-bottom-left-radius: 10px;
     }
+  }
+
+  .more-icon-container {
+    background: rgba(0, 0, 0, .7);
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
 </style>
