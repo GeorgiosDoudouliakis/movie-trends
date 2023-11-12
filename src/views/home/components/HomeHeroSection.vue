@@ -5,7 +5,7 @@
       <span class="text-2xl text-primary mb-4">WELCOME TO MOVIETRENDS!</span>
       <p class="text-xl mb-6">Explore movies, tv series and details for them from anywhere and anytime</p>
       <div class="flex search-container">
-        <input type="text" placeholder="Search for movies, tv series and persons..." v-model="searchTerm" />
+        <input type="text" placeholder="Search for movies, tv series or persons..." v-model="searchTerm" />
         <button class="btn-primary">
           <router-link to="/">Search</router-link>
         </button>
