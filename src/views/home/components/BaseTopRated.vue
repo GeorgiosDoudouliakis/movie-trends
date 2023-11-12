@@ -55,6 +55,14 @@
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
     }
+
+    &::-webkit-scrollbar-track {
+      background: var(--secondary-color);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+    }
   }
 
   .loader-container {
