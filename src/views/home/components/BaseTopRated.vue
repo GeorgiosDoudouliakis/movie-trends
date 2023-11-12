@@ -2,7 +2,7 @@
   <div class="w-full px-8 py-12">
     <div class="flex justify-between items-center mb-10">
       <h2 class="text-lg text-secondary">Top Rated {{ itemsType }}</h2>
-      <button class="btn-secondary"><router-link :to="btnPath">All {{ itemsType }}</router-link></button>
+      <button class="btn-secondary"><router-link :to="btnPath">Show All</router-link></button>
     </div>
 
     <template v-if="!loading">
