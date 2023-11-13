@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/home/HomeView.vue'
 import MoviesView from "@/views/movies/MoviesView.vue";
 import TvSeriesView from "@/views/tv-series/TvSeriesView.vue";
+import PeopleView from "@/views/people/PeopleView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -26,6 +27,14 @@ const routes: Array<RouteRecordRaw> = [
     component: TvSeriesView,
     meta: {
       title: 'Tv Series'
+    }
+  },
+  {
+    path: '/people',
+    name: 'People',
+    component: PeopleView,
+    meta: {
+      title: 'People'
     }
   }
 ];

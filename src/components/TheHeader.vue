@@ -1,18 +1,20 @@
 <template>
   <header :class="{ 'py-4': isOnMobile }" class="wrapper relative">
     <nav class="flex justify-between items-center">
-      <h1 class="text-2xl font-semibold tracking-widest">MOVIETRENDS</h1>
+      <h1 class="text-2xl font-semibold tracking-widest">
+        <router-link to="/">MOVIETRENDS</router-link>
+      </h1>
 
       <template v-if="!isOnMobile">
         <ul class="flex">
-          <li>
-            <router-link :to="{ name: 'Home' }" class="text-secondary text-lg p-4">Home</router-link>
-          </li>
           <li>
             <router-link :to="{ name: 'Movies' }" class="text-secondary text-lg p-4">Movies</router-link>
           </li>
           <li>
             <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4">Tv Series</router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'People' }" class="text-secondary text-lg p-4">People</router-link>
           </li>
         </ul>
       </template>
@@ -28,13 +30,13 @@
       <div v-if="isOnMobile" class="flex flex-col justify-center items-center mobile-menu" :class="{ 'mobile-menu-active': isMobileMenuActive }">
         <ul class="flex flex-col items-center">
           <li>
-            <router-link :to="{ name: 'Home' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">Home</router-link>
-          </li>
-          <li>
             <router-link :to="{ name: 'Movies' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">Movies</router-link>
           </li>
           <li>
             <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">Tv Series</router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'People' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">People</router-link>
           </li>
         </ul>
       </div>
@@ -102,7 +104,7 @@
     }
   }
 
-  .router-link-exact-active {
+  .router-link-exact-active:not(h1 > a) {
     @apply text-primary;
     position: relative;
 
