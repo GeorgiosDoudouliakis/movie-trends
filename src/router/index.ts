@@ -1,15 +1,10 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/home/HomeView.vue'
-import MoviesView from "@/views/movies/MoviesView.vue";
-import TvSeriesView from "@/views/tv-series/TvSeriesView.vue";
-import PeopleView from "@/views/people/PeopleView.vue";
-import SearchView from "@/views/search/SearchView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: HomeView,
+    component: () => import("../views/home/HomeView.vue"),
     meta: {
       title: 'Home'
     }
@@ -17,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/movies',
     name: 'Movies',
-    component: MoviesView,
+    component: () => import("../views/movies/MoviesView.vue"),
     meta: {
       title: 'Movies'
     }
@@ -25,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/tv-series',
     name: 'TvSeries',
-    component: TvSeriesView,
+    component: () => import("../views/tv-series/TvSeriesView.vue"),
     meta: {
       title: 'Tv Series'
     }
@@ -33,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/people',
     name: 'People',
-    component: PeopleView,
+    component: () => import("../views/people/PeopleView.vue"),
     meta: {
       title: 'People'
     }
@@ -41,7 +36,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/search',
     name: 'Search',
-    component: SearchView,
+    component: () => import("../views/search/SearchView.vue"),
     meta: {
       title: 'Search'
     }
