@@ -19,9 +19,7 @@
 
   const searchTerm = ref<string>("");
 
-  const term = computed(() => {
-    return searchTerm.value.replaceAll(" ", "-");
-  });
+  const term = computed(() => searchTerm.value.replaceAll(" ", "-"));
 </script>
 
 <style scoped lang="scss">
