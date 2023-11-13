@@ -5,10 +5,11 @@
         <path fill="#20ffe8" fill-rule="evenodd" d="M12 3a2 2 0 10-4 0 2 2 0 004 0zm-2 5a2 2 0 110 4 2 2 0 010-4zm0 7a2 2 0 110 4 2 2 0 010-4z"/>
       </svg>
     </div>
-    <span class="absolute p-2">{{ item.rate }}</span>
     <img class="responsive-img" :src="item.image" :alt="item.title + 'poster'" width="185" height="278">
-    <div class="absolute left-0 bottom-0 p-3 w-full title-container">
-      <h3 class="font-bold text-center text-secondary">{{ item.title }}</h3>
+    <span class="absolute p-2">{{ item.rate }}</span>
+    <div class="p-2">
+      <h3 class="font-bold text-base mb-1">{{ item.title }}</h3>
+      <span>{{ item.releaseDate }}</span>
     </div>
   </div>
 
@@ -50,13 +51,6 @@
 
     > img {
       border-radius: 10px;
-    }
-
-    > .title-container {
-      content: "";
-      background-color: rgba(0, 0, 0, .9);
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
     }
 
     > span {

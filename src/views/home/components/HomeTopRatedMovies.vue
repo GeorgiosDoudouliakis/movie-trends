@@ -19,7 +19,8 @@
               title: movie.title,
               description: movie.overview,
               rate: +Number.parseFloat(movie.vote_average.toString()).toFixed(1),
-              image: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`
+              image: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
+              releaseDate: movie.release_date
             })
           })
         })

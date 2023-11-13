@@ -6,7 +6,7 @@
     </div>
 
     <template v-if="!loading">
-      <div class="flex gap-x-6 justify-between items-center overflow-x-auto w-full top-rated-items-container">
+      <div class="flex gap-x-6 justify-between overflow-x-auto w-full top-rated-items-container">
         <BaseTopRatedItem v-for="item in items" :key="item.id" :item="item" />
       </div>
     </template>
@@ -45,7 +45,7 @@
 
 <style scoped lang="scss">
   .top-rated-items-container {
-    height: 300px;
+    height: 410px;
 
     &::-webkit-scrollbar {
       height: 8px;
@@ -67,6 +67,6 @@
 
   .loader-container {
     width: 100%;
-    height: 300px;
+    height: 420px;
   }
 </style>

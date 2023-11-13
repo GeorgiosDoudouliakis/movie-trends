@@ -4,4 +4,5 @@ export interface TopRatedItemModel {
     description: string;
     rate: number;
     image: string;
+    releaseDate: string;
 }
