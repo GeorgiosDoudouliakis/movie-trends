@@ -4,16 +4,17 @@
 
 <script setup lang="ts">
   import { onMounted } from "vue";
-  import BaseTopRated from "@/views/home/components/BaseTopRated.vue";
-  import { useTopRated } from "@/views/home/composables/useTopRated";
-  import { TopRatedTvSerie, TopRatedTvSeriesResponse } from "@/views/home/interfaces";
+  import BaseTopRated from "../components/BaseTopRated.vue";
+  import { useTopRated } from "../composables/useTopRated";
+  import { TopRatedTvSeriesResponse } from "../interfaces";
+  import { TvSerie } from "@/interfaces";
 
-  const { items, loading, mappedReleaseDate, topRatedItems$ } = useTopRated<TopRatedTvSeriesResponse, TopRatedTvSerie>();
+  const { items, loading, mappedReleaseDate, topRatedItems$ } = useTopRated<TopRatedTvSeriesResponse, TvSerie>();
 
   onMounted(() => {
     topRatedItems$("tv")
-        .then((tvSeries: TopRatedTvSerie[]) => {
-          tvSeries.forEach((tvSerie: TopRatedTvSerie) => {
+        .then((tvSeries: TvSerie[]) => {
+          tvSeries.forEach((tvSerie: TvSerie) => {
             items.value.push({
               id: tvSerie.id,
               title: tvSerie.name,

@@ -1,7 +1,8 @@
 import { ref } from "vue";
-import { BaseTopRatedItem, BaseTopRatedResponse, TopRatedItemModel } from "@/views/home/interfaces";
+import { BaseTopRatedResponse, TopRatedItemModel } from "../interfaces";
+import { BaseItem } from "@/interfaces";
 
-export function useTopRated<ResponseType extends BaseTopRatedResponse<ItemType>, ItemType extends BaseTopRatedItem>() {
+export function useTopRated<ResponseType extends BaseTopRatedResponse<ItemType>, ItemType extends BaseItem>() {
     const loading = ref<boolean>(true);
     const items = ref<TopRatedItemModel[]>([]);
 

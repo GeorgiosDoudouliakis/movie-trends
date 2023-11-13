@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
   import { PropType } from "vue";
-  import { TopRatedItemModel } from "@/views/home/interfaces";
+  import { TopRatedItemModel } from "../interfaces";
 
   defineProps({
     item: {
