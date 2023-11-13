@@ -7,7 +7,7 @@
       <div class="flex search-container">
         <input type="text" placeholder="Search for movies, tv series or persons..." v-model="searchTerm" />
         <button class="btn-primary">
-          <router-link to="/">Search</router-link>
+          <router-link :to="{ name: 'Search', query: { term } }">Search</router-link>
         </button>
       </div>
     </div>
@@ -15,9 +15,13 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from "vue";
+  import { computed, ref } from "vue";
 
   const searchTerm = ref<string>("");
+
+  const term = computed(() => {
+    return searchTerm.value.replaceAll(" ", "-");
+  });
 </script>
 
 <style scoped lang="scss">

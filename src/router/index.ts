@@ -3,6 +3,7 @@ import HomeView from '../views/home/HomeView.vue'
 import MoviesView from "@/views/movies/MoviesView.vue";
 import TvSeriesView from "@/views/tv-series/TvSeriesView.vue";
 import PeopleView from "@/views/people/PeopleView.vue";
+import SearchView from "@/views/search/SearchView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -35,6 +36,14 @@ const routes: Array<RouteRecordRaw> = [
     component: PeopleView,
     meta: {
       title: 'People'
+    }
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: SearchView,
+    meta: {
+      title: 'Search'
     }
   }
 ];
