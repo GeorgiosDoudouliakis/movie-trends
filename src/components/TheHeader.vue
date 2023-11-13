@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ 'py-4': isOnMobile }" class="wrapper relative">
+  <header :class="{ 'py-4': isOnMobile }" class="wrapper">
     <nav class="flex justify-between items-center">
       <h1 class="text-2xl font-semibold tracking-widest">
         <router-link to="/">MOVIETRENDS</router-link>
@@ -27,7 +27,7 @@
         <div class="w-full bg-primary"></div>
       </div>
 
-      <div v-if="isOnMobile" class="flex flex-col justify-center items-center mobile-menu" :class="{ 'mobile-menu-active': isMobileMenuActive }">
+      <div v-if="isOnMobile" class="fixed left-0 flex flex-col justify-center items-center mobile-menu" :class="{ 'mobile-menu-active': isMobileMenuActive }">
         <ul class="flex flex-col items-center">
           <li>
             <router-link :to="{ name: 'Movies' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">Movies</router-link>
@@ -87,9 +87,7 @@
   }
 
   .mobile-menu {
-    position: absolute;
     top: 61px;
-    left: 0;
     width: 0;
     opacity: 0;
     height: calc(100vh - 65px);
@@ -100,7 +98,7 @@
     &.mobile-menu-active {
       width: 100%;
       opacity: 1;
-      z-index: 2;
+      z-index: 10;
     }
   }
 
