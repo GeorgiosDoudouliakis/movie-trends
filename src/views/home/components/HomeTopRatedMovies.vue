@@ -8,7 +8,7 @@
   import { useTopRated } from "@/views/home/composables/useTopRated";
   import { TopRatedMovie, TopRatedMoviesResponse } from "@/views/home/interfaces";
 
-  const { items, loading, topRatedItems$ } = useTopRated<TopRatedMoviesResponse, TopRatedMovie>();
+  const { items, loading, mappedReleaseDate, topRatedItems$ } = useTopRated<TopRatedMoviesResponse, TopRatedMovie>();
 
   onMounted(() => {
     topRatedItems$("movie")
@@ -20,7 +20,7 @@
               description: movie.overview,
               rate: +Number.parseFloat(movie.vote_average.toString()).toFixed(1),
               image: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
-              releaseDate: movie.release_date
+              releaseDate: mappedReleaseDate(movie.release_date)
             })
           })
         })

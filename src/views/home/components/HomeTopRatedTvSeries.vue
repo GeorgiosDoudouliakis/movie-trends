@@ -8,7 +8,7 @@
   import { useTopRated } from "@/views/home/composables/useTopRated";
   import { TopRatedTvSerie, TopRatedTvSeriesResponse } from "@/views/home/interfaces";
 
-  const { items, loading, topRatedItems$ } = useTopRated<TopRatedTvSeriesResponse, TopRatedTvSerie>();
+  const { items, loading, mappedReleaseDate, topRatedItems$ } = useTopRated<TopRatedTvSeriesResponse, TopRatedTvSerie>();
 
   onMounted(() => {
     topRatedItems$("tv")
@@ -20,7 +20,7 @@
               description: tvSerie.overview,
               rate: +Number.parseFloat(tvSerie.vote_average.toString()).toFixed(1),
               image: `https://image.tmdb.org/t/p/w185/${tvSerie.poster_path}`,
-              releaseDate: tvSerie.first_air_date
+              releaseDate: mappedReleaseDate(tvSerie.first_air_date)
             });
           });
         })
