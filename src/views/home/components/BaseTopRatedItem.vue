@@ -1,30 +1,19 @@
 <template>
-  <div class="item-container relative shrink-0">
-    <div class="absolute cursor-pointer p-2 more-icon-container">
-      <svg width="30px" height="30px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none" @click="showDescription">
-        <path fill="#20ffe8" fill-rule="evenodd" d="M12 3a2 2 0 10-4 0 2 2 0 004 0zm-2 5a2 2 0 110 4 2 2 0 010-4zm0 7a2 2 0 110 4 2 2 0 010-4z"/>
-      </svg>
-    </div>
-    <img class="responsive-img" :src="item.image" :alt="item.title + 'poster'" width="185" height="278">
+  <div class="relative shrink-0 cursor-pointer item-container">
     <span class="absolute p-2">{{ item.rate }}</span>
+    <div class="img-container">
+      <img class="responsive-img" :src="item.image" :alt="item.title + 'poster'" width="185" height="278">
+    </div>
     <div class="p-2">
       <h3 class="font-bold text-base mb-1">{{ item.title }}</h3>
       <span>{{ item.releaseDate }}</span>
     </div>
   </div>
-
-  <teleport to="body">
-    <BaseItemDescriptionModal v-if="isModalActive" :title="item.title"
-       :description="item.description" :is-modal-active="isModalActive" @modal-close="onModalClose"/>
-  </teleport>
 </template>
 
 <script setup lang="ts">
-  import { PropType, ref } from "vue";
+  import { PropType } from "vue";
   import { TopRatedItemModel } from "@/views/home/interfaces";
-  import BaseItemDescriptionModal from "@/views/home/components/BaseItemDescriptionModal.vue";
-
-  const isModalActive = ref<boolean>(false);
 
   defineProps({
     item: {
@@ -32,25 +21,19 @@
       required: true
     }
   });
-
-  const showDescription = () => {
-    isModalActive.value = true;
-    document.body.style.overflow = "hidden";
-  };
-
-  const onModalClose = () => {
-    isModalActive.value = false;
-    document.body.style.overflow = "auto";
-  };
 </script>
 
 <style scoped lang="scss">
   .item-container {
     width: 185px;
-    height: 278px;
+    height: 100%;
 
-    > img {
-      border-radius: 10px;
+    > .img-container {
+      height: 278px;
+
+      > img {
+        border-radius: 10px;
+      }
     }
 
     > span {
@@ -61,11 +44,5 @@
       border-top-right-radius: 10px;
       border-bottom-left-radius: 10px;
     }
-  }
-
-  .more-icon-container {
-    background: rgba(0, 0, 0, .7);
-    border-top-left-radius: 10px;
-    border-bottom-right-radius: 10px;
   }
 </style>
