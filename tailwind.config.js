@@ -5,7 +5,8 @@ module.exports = {
     colors: {
       'primary': '#20ffe8',
       'secondary': '#fcfcfc',
-      'lighter-black': '#0f1219'
+      'lighter-black': '#0f1219',
+      'card-bg': '#202336'
     },
     extend: {
       fontFamily: {

@@ -17,6 +17,7 @@
     --secondary-color: #fcfcfc;
     --lighter-black-color: #0f1219;
     --border-color: #3b4046;
+    --card-bg: #202336;
   }
 
   * {
@@ -36,7 +37,7 @@
     @apply text-primary;
   }
 
-  a, p, span {
+  a, p, span, li {
     @apply text-secondary;
   }
 
