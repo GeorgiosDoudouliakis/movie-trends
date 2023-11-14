@@ -6,14 +6,14 @@
         <PeopleItem v-for="person in people" :key="person.id" :person="person" />
       </div>
     </template>
-    <div v-else class="flex justify-center items-center">
+    <div v-if="loading || isOnLoadMore" class="flex justify-center items-center pt-4">
       <BaseLoader />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from "vue";
+  import { onBeforeUnmount, onMounted, ref } from "vue";
   import { People, Person } from "@/views/people/interfaces/people-response.interface";
   import PeopleItem from "@/views/people/components/PeopleItem.vue";
   import BaseLoader from "@/components/BaseLoader.vue";
@@ -21,23 +21,36 @@
   const people = ref<Person[]>([]);
   const currentPage = ref<number>(1);
   const loading = ref<boolean>(true);
+  const isOnLoadMore = ref<boolean>(false)
 
   function getPopularPeople(page: number) {
     fetch(`https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US&page=${page}`)
         .then(response => response.json())
         .then((response: People) => {
-          people.value = response.results.map((person: Person) => {
+          const mappedResults = response.results.map((person: Person) => {
             return { ...person, profile_path: `https://image.tmdb.org/t/p/w185/${person.profile_path}` };
           });
+          people.value = [...people.value, ...mappedResults];
           currentPage.value = response.page;
         })
         .catch(err => console.error(err))
-        .finally(() => loading.value = false);
+        .finally(() => {
+          loading.value = false;
+          if (isOnLoadMore) isOnLoadMore.value = false;
+        });
   }
 
-  onMounted(() => getPopularPeople(1));
+  function fetchOnScroll(): void {
+    if (document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight) {
+      isOnLoadMore.value = true;
+      getPopularPeople(currentPage.value + 1);
+    }
+  }
+
+  onMounted(() => {
+    window.addEventListener('scroll', () => fetchOnScroll());
+    getPopularPeople(1);
+  });
+
+  onBeforeUnmount(() => window.removeEventListener('scroll', fetchOnScroll))
 </script>
-
-<style scoped lang="scss">
-
-</style>
