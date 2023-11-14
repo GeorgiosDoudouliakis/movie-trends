@@ -24,6 +24,11 @@
     width: 185px;
     background: var(--card-bg);
     border-radius: 16px;
+    transition: transform .5s;
+
+    &:hover {
+      transform: rotate(-3deg);
+    }
 
     > .img-container {
       width: 185px;
