@@ -2,7 +2,7 @@ import { Movie, TvSerie } from "@/interfaces";
 
 export type PersonKnownFor = (Movie | TvSerie) & { type: "movie" | "tv" };
 
-export interface PersonResponseInterface {
+export interface Person {
     adult: false;
     gender: number;
     id: number;
@@ -14,9 +14,9 @@ export interface PersonResponseInterface {
     profile_path: string;
 }
 
-export interface PeopleResponseInterface {
+export interface People {
     page: number;
-    results: [];
+    results: Person[];
     total_pages: number;
     total_results: number;
 }

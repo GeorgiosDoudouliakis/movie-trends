@@ -5,12 +5,19 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted } from "vue";
+  import { onMounted, ref } from "vue";
+  import { People, Person } from "@/views/people/interfaces/people-response.interface";
+
+  const people = ref<Person[]>([]);
+  const currentPage = ref<number>(1);
 
   function getPopularPeople(page: number) {
     fetch(`https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US&page=${page}`)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then((response: People) => {
+          people.value = response.results;
+          currentPage.value = response.page;
+        })
         .catch(err => console.error(err));
   }
 
