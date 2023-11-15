@@ -73,6 +73,10 @@
 </script>
 
 <style scoped lang="scss">
+  header {
+    border-bottom: 1px solid var(--border-color);
+  }
+
   .mobile-menu-icon {
     width: 30px;
     height: 20px;
@@ -94,10 +98,10 @@
   }
 
   .mobile-menu {
-    top: 61px;
+    top: 69px;
     width: 0;
     opacity: 0;
-    height: calc(100vh - 65px);
+    height: calc(100vh - 69px);
     background: darken(#0f1219, 15%);
     z-index: -1;
     transition: all .5s;

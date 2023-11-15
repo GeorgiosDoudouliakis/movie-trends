@@ -57,10 +57,10 @@
   }
 
   main {
-    min-height: calc(100vh - 112px);
+    min-height: calc(100vh - 117px);
 
-    @media(min-width: 1024px) {
-      min-height: calc(100vh - 108px);
+    @media(min-width: 768px) {
+      min-height: calc(100vh - 109px);
     }
   }
 
