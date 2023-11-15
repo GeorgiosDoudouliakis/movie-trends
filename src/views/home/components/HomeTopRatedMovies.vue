@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
   import { onMounted } from "vue";
-  import BaseTopRated from "../components/BaseTopRated.vue";
+  import BaseTopRated from "./base/BaseTopRated.vue";
   import { useTopRated } from "../composables/useTopRated";
   import { TopRatedMoviesResponse } from "../interfaces";
   import { Movie } from "@/interfaces";

@@ -16,7 +16,7 @@
   import { onBeforeUnmount, onMounted, ref } from "vue";
   import { People, Person } from "@/views/people/interfaces/people-response.interface";
   import PeopleItem from "@/views/people/components/PeopleItem.vue";
-  import BaseLoader from "@/components/BaseLoader.vue";
+  import BaseLoader from "@/components/base/BaseLoader.vue";
 
   const people = ref<Person[]>([]);
   const currentPage = ref<number>(1);

@@ -19,9 +19,9 @@
 
 <script setup lang="ts">
   import { PropType } from "vue";
-  import { TopRatedItemModel } from "../interfaces";
-  import BaseLoader from "@/components/BaseLoader.vue";
-  import BaseTopRatedItem from "../components/BaseTopRatedItem.vue";
+  import { TopRatedItemModel } from "../../interfaces";
+  import BaseLoader from "@/components/base/BaseLoader.vue";
+  import BaseTopRatedItem from "./BaseTopRatedItem.vue";
 
   defineProps({
     itemsType: {
