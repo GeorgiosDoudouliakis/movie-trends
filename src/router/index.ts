@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import decodeUri from "@/helpers/decodeUri";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -37,7 +38,8 @@ const routes: Array<RouteRecordRaw> = [
         }
       },
       {
-        path: ":person",
+        path: ":name",
+        name: 'Person',
         component: () => import("../views/people/PersonView.vue")
       }
     ]
@@ -58,7 +60,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} | MovieTrends`;
+  if (to.params.name) {
+    document.title = `${decodeUri(to.params.name as string)} | MovieTrends`;
+  } else {
+    document.title = `${to.meta.title} | MovieTrends`;
+  }
   next();
 });
 
