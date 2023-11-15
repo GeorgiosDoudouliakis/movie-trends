@@ -3,7 +3,14 @@
     <h2 class="text-2xl mb-10">Popular People</h2>
     <template v-if="!loading">
       <div class="flex flex-wrap justify-between gap-6">
-        <PeopleItem v-for="person in people" :key="person.id" :person="person" />
+        <BaseCard v-for="person in people" :key="person.id" :person="person">
+          <template v-slot:card-img>
+            <img class="responsive-img" :src="person.profile_path" alt="{{ person.original_name }}">
+          </template>
+          <template v-slot:card-content>
+            <h3>{{ person.original_name }}</h3>
+          </template>
+        </BaseCard>
       </div>
     </template>
     <div v-if="loading || isOnLoadMore" class="flex justify-center items-center pt-4">
@@ -15,7 +22,7 @@
 <script setup lang="ts">
   import { onBeforeUnmount, onMounted, ref } from "vue";
   import { People, Person } from "@/views/people/interfaces/people-response.interface";
-  import PeopleItem from "@/views/people/components/PeopleItem.vue";
+  import BaseCard from "@/components/base/BaseCard.vue";
   import BaseLoader from "@/components/base/BaseLoader.vue";
 
   const people = ref<Person[]>([]);
