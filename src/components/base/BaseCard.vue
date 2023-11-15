@@ -30,10 +30,11 @@
     width: 185px;
     background: var(--card-bg);
     border-radius: 16px;
-    transition: transform .5s;
+    transition: all .5s;
 
     &:hover {
       transform: rotate(-3deg);
+      box-shadow: 0 0 10px 5px var(--border-color);
     }
 
     > .img-container {
