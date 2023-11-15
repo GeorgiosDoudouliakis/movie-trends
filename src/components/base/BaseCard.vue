@@ -1,13 +1,29 @@
 <template>
   <div class="mb-6 cursor-pointer card-container">
     <div class="img-container">
-      <slot name="card-img"></slot>
+      <img class="responsive-img" :src="image.src" :alt="image.alt">
     </div>
     <div class="flex flex-col items-center px-2 py-4">
-      <slot name="card-content"></slot>
+      <h3>{{ name }}</h3>
+      <slot></slot>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+  import { PropType } from "vue";
+
+  defineProps({
+    image: {
+      type: Object as PropType<{ src: string; alt: string }>,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    }
+  })
+</script>
 
 <style scoped lang="scss">
   .card-container {
