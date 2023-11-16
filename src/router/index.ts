@@ -27,22 +27,12 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/people',
-    children: [
-      {
-        path: "",
-        name: 'People',
-        component: () => import("../views/people/PeopleView.vue"),
-        meta: {
-          title: 'People'
-        }
-      },
-      {
-        path: ":name",
-        name: 'Person',
-        component: () => import("../views/people/PersonView.vue")
-      }
-    ]
+    path: "/people",
+    name: 'People',
+    component: () => import("../views/people/PeopleView.vue"),
+    meta: {
+      title: 'People'
+    }
   },
   {
     path: '/search',
