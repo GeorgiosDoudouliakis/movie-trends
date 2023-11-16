@@ -1,6 +1,6 @@
 <template>
   <div class="py-12 wrapper">
-    <h2 class="text-2xl mb-10">Popular People</h2>
+    <h2 class="text-2xl text-center mb-10">Popular People</h2>
     <template v-if="!loading">
       <div class="flex flex-wrap justify-center gap-6">
         <BaseCard v-for="person in people" :key="person.id" :name="person.original_name"
@@ -62,13 +62,3 @@
 
   onBeforeUnmount(() => window.removeEventListener('scroll', fetchOnScroll))
 </script>
-
-<style scoped lang="scss">
-  h2 {
-    text-align: center;
-
-    @media(min-width: 455px) {
-      text-align: left;
-    }
-  }
-</style>
