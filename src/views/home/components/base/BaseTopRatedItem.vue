@@ -12,15 +12,9 @@
 </template>
 
 <script setup lang="ts">
-  import { PropType } from "vue";
   import { TopRatedItemModel } from "../../interfaces";
 
-  defineProps({
-    item: {
-      type: Object as PropType<TopRatedItemModel>,
-      required: true
-    }
-  });
+  defineProps<{ item: TopRatedItemModel }>();
 </script>
 
 <style scoped lang="scss">

@@ -11,18 +11,10 @@
 </template>
 
 <script setup lang="ts">
-  import { PropType } from "vue";
-
-  defineProps({
-    image: {
-      type: Object as PropType<{ src: string; alt: string }>,
-      required: true
-    },
-    name: {
-      type: String,
-      required: true
-    }
-  })
+  defineProps<{
+    image: { src: string; alt: string },
+    name: string
+  }>();
 </script>
 
 <style scoped lang="scss">

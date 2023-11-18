@@ -18,29 +18,16 @@
 </template>
 
 <script setup lang="ts">
-  import { PropType } from "vue";
   import { TopRatedItemModel } from "../../interfaces";
   import BaseLoader from "@/components/base/BaseLoader.vue";
   import BaseTopRatedItem from "./BaseTopRatedItem.vue";
 
-  defineProps({
-    itemsType: {
-      type: String as PropType<"Movies" | "Tv Series">,
-      required: true
-    },
-    items: {
-      type: Array as PropType<TopRatedItemModel[]>,
-      required: true
-    },
-    loading: {
-      type: Boolean,
-      required: true
-    },
-    btnPath: {
-      type: String as PropType<"movies" | "tv-series">,
-      required: true
-    }
-  });
+  defineProps<{
+    itemsType: "Movies" | "Tv Series",
+    items: TopRatedItemModel[],
+    loading: boolean,
+    btnPath: "movies" | "tv-series"
+  }>();
 </script>
 
 <style scoped lang="scss">
