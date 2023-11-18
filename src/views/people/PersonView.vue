@@ -1,7 +1,30 @@
 <template>
-  <div v-if="!loading" class="flex">
-    <div class="flex flex-col general-info"></div>
-    <div class="ml-4"></div>
+  <div v-if="!loading" class="flex py-12 wrapper">
+    <div class="flex flex-col general-info">
+      <div class="mb-8 img-container">
+        <img class="responsive-img" :src="personModel['profile_path']" :alt="personModel['name']" width="250"/>
+      </div>
+      <h3 class="text-xl mb-8">Personal Information</h3>
+      <span class="text-xl mb-1">Known for Department</span>
+      <span class="text-base mb-4">{{ personModel['known_for_department'] }}</span>
+      <span class="text-xl mb-1">Birth Day</span>
+      <span class="text-base mb-4">{{ personModel['birthday'] }}</span>
+      <template v-if="personModel['deathday']">
+        <span class="text-xl mb-1">Death Day</span>
+        <span class="text-base mb-4">{{ personModel['deathday'] }}</span>
+      </template>
+      <span class="text-xl mb-1">Place of birth</span>
+      <span class="text-base mb-4">{{ personModel['place_of_birth'] }}</span>
+      <span class="text-xl mb-1">Also known as</span>
+      <ul>
+        <li v-for="known in personModel['also_known_as']">{{ known }}</li>
+      </ul>
+    </div>
+    <div class="ml-10">
+      <h2 class="text-2xl mb-10">{{ personModel['name'] }}</h2>
+      <span class="inline-flex text-xl mb-4">Biography</span>
+      <p>{{ personModel['biography'] }}</p>
+    </div>
   </div>
 
   <div v-else class="flex justify-center pt-20">
@@ -14,7 +37,7 @@
   import BaseLoader from "@/components/base/BaseLoader.vue";
   import { Person, PersonDetails } from "@/views/people/interfaces/people-response.interface";
 
-  const personModel = ref<Pick<Person, "name" | "known_for" | "profile_path"> & Pick<PersonDetails, "biography" | "birthday" | "deathday" | "place_of_birth"> | null>(null);
+  const personModel = ref<Pick<Person, "name" | "known_for" | "profile_path"> & Pick<PersonDetails, "biography" | "birthday" | "deathday" | "place_of_birth" | "known_for_department" | "also_known_as"> | null>(null);
   const loading = ref<boolean>(true);
 
   const { idName } = defineProps<{ idName: string }>();
@@ -35,7 +58,9 @@
         biography: personDetails.biography,
         birthday: personDetails.birthday,
         deathday: personDetails.deathday,
-        place_of_birth: personDetails.place_of_birth
+        place_of_birth: personDetails.place_of_birth,
+        known_for_department: personDetails.known_for_department,
+        also_known_as: personDetails.also_known_as
       }
     }
     catch (err) {
@@ -52,5 +77,13 @@
 <style scoped lang="scss">
   .general-info {
     width: 300px;
+
+    > .img-container {
+      width: 250px;
+
+      > img {
+        border-radius: 16px;
+      }
+    }
   }
 </style>
