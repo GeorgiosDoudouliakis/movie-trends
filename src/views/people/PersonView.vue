@@ -5,7 +5,7 @@
         <img class="responsive-img" :src="personModel['profile_path']" :alt="personModel['name']" width="250"/>
       </div>
       <h3 class="text-xl mb-8">Personal Information</h3>
-      <span class="text-xl mb-1">Known for Department</span>
+      <span class="text-xl mb-1">Known for department</span>
       <span class="text-base mb-4">{{ personModel['known_for_department'] }}</span>
       <span class="text-xl mb-1">Birth Day</span>
       <span class="text-base mb-4">{{ personModel['birthday'] }}</span>
@@ -23,7 +23,8 @@
     <div class="ml-10">
       <h2 class="text-2xl mb-10">{{ personModel['name'] }}</h2>
       <span class="inline-flex text-xl mb-4">Biography</span>
-      <p>{{ personModel['biography'] }}</p>
+      <p class="mb-10">{{ personModel['biography'] }}</p>
+      <span class="text-xl mb-4">Known for</span>
     </div>
   </div>
 
