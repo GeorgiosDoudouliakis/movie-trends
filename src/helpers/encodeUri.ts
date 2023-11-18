@@ -1,5 +1,5 @@
-const encodeUri = (uri: string): string => {
-    return uri.replaceAll(" ", "-");
+const encodeUri = (id: number, name: string): string => {
+    return `${id}-${name.replaceAll(" ", "-")}`;
 }
 
 export default encodeUri;

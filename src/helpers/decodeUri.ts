@@ -1,5 +1,5 @@
 const decodeUri = (uri: string): string => {
-    return uri.replaceAll("-", " ");
+    return uri.split("-").slice(1).join(" ");
 }
 
 export default decodeUri;

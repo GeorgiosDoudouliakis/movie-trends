@@ -28,11 +28,21 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/people",
-    name: 'People',
-    component: () => import("../views/people/PeopleView.vue"),
-    meta: {
-      title: 'People'
-    }
+    children: [
+      {
+        path: "",
+        name: 'People',
+        component: () => import("../views/people/PeopleView.vue"),
+        meta: {
+          title: 'People'
+        },
+      },
+      {
+        path: ":idName",
+        name: 'Person',
+        component: () => import("../views/people/PersonView.vue")
+      }
+    ]
   },
   {
     path: '/search',
@@ -50,8 +60,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.params.name) {
-    document.title = `${decodeUri(to.params.name as string)} | MovieTrends`;
+  if (to.params.idName) {
+    document.title = `${decodeUri(to.params.idName as string)} | MovieTrends`;
   } else {
     document.title = `${to.meta.title} | MovieTrends`;
   }

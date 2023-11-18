@@ -4,7 +4,8 @@
     <template v-if="!loading">
       <div class="flex flex-wrap justify-center gap-6">
         <BaseCard v-for="person in people" :key="person.id" :name="person.original_name"
-          :image="{ src: person.profile_path, alt: person.original_name }">
+          :image="{ src: person.profile_path, alt: person.original_name }"
+          @click="goToPerson(person)">
         </BaseCard>
       </div>
     </template>
@@ -19,6 +20,8 @@
   import { People, Person } from "@/views/people/interfaces/people-response.interface";
   import BaseCard from "@/components/base/BaseCard.vue";
   import BaseLoader from "@/components/base/BaseLoader.vue";
+  import router from "@/router";
+  import encodeUri from "@/helpers/encodeUri";
 
   const people = ref<Person[]>([]);
   const currentPage = ref<number>(1);
@@ -47,6 +50,10 @@
       isOnLoadMore.value = true;
       getPopularPeople(currentPage.value + 1);
     }
+  }
+
+  function goToPerson(person: Person): void {
+    router.push({ name: 'Person', params: { idName: encodeUri(person.id, person.name) } });
   }
 
   onMounted(() => {
