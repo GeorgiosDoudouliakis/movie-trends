@@ -25,6 +25,7 @@
 
   const people = ref<Person[]>([]);
   const currentPage = ref<number>(1);
+  const totalPages = ref<number>(1);
   const loading = ref<boolean>(true);
   const isOnLoadMore = ref<boolean>(false)
 
@@ -37,6 +38,7 @@
           });
           people.value = [...people.value, ...mappedResults];
           currentPage.value = response.page;
+          totalPages.value = response.total_pages;
         })
         .catch(err => console.error(err))
         .finally(() => {
@@ -46,9 +48,11 @@
   }
 
   function fetchOnScroll(): void {
-    if (document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight) {
-      isOnLoadMore.value = true;
-      getPopularPeople(currentPage.value + 1);
+    if (
+        document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight &&
+        currentPage.value + 1 <= totalPages.value) {
+          isOnLoadMore.value = true;
+          getPopularPeople(currentPage.value + 1);
     }
   }
 
