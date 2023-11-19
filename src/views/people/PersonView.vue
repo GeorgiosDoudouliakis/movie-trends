@@ -21,10 +21,19 @@
       </ul>
     </div>
     <div class="ml-10">
-      <h2 class="text-2xl mb-10">{{ personModel['name'] }}</h2>
-      <span class="inline-flex text-xl mb-4">Biography</span>
+      <div class="flex justify-between items-center mb-10">
+        <h2 class="text-2xl">{{ personModel['name'] }}</h2>
+        <router-link class="btn-primary p-2" :to="{ name: 'People' }">Popular People</router-link>
+      </div>
+      <span class="inline-flex text-xl mb-6">Biography</span>
       <p class="mb-10">{{ personModel['biography'] }}</p>
-      <span class="text-xl mb-4">Known for</span>
+      <span class="inline-flex text-xl mb-6">Known for</span>
+      <ul>
+        <li class="flex justify-between items-center text-lg p-4 known-for-item" v-for="known in personModel['known_for']" :key="known.id">
+          <span>{{ known.title || known.name }}</span>
+          <button class="px-3 py-1 btn-secondary">Show More</button>
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -85,6 +94,14 @@
       > img {
         border-radius: 16px;
       }
+    }
+  }
+
+  .known-for-item {
+    border: 1px solid var(--border-color);
+
+    &:not(:last-of-type) {
+      margin-bottom: 15px;
     }
   }
 </style>
