@@ -20,7 +20,7 @@
         <li v-for="known in personModel['also_known_as']">{{ known }}</li>
       </ul>
     </div>
-    <div class="ml-10">
+    <div class="info">
       <div class="flex justify-between items-center mb-10">
         <h2 class="text-2xl">{{ personModel['name'] }}</h2>
         <router-link class="btn-primary p-2" :to="{ name: 'People' }">Popular People</router-link>
@@ -85,15 +85,42 @@
 </script>
 
 <style scoped lang="scss">
+  .wrapper {
+    flex-direction: column;
+
+    @media(min-width: 1024px) {
+      flex-direction: row;
+    }
+  }
+
   .general-info {
-    width: 300px;
+    order: 2;
+
+    @media(min-width: 1024px) {
+      order: 0;
+      width: 300px;
+    }
 
     > .img-container {
-      width: 250px;
+      display: none;
+
+      @media(min-width: 1024px) {
+        display: initial;
+        width: 250px;
+      }
 
       > img {
         border-radius: 16px;
       }
+    }
+  }
+
+  .info {
+    margin-bottom: 40px;
+
+    @media(min-width: 1024px) {
+      margin-left: 40px;
+      margin-bottom: 0;
     }
   }
 
