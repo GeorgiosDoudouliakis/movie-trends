@@ -119,6 +119,7 @@
     margin-bottom: 40px;
 
     @media(min-width: 1024px) {
+      width: 100%;
       margin-left: 40px;
       margin-bottom: 0;
     }
