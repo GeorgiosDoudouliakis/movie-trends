@@ -1,5 +1,5 @@
-const encodeIdNameParamHelper = (id: number, name: string): string => {
+const encodeIdNameParam = (id: number, name: string): string => {
     return `${id}-${name.replaceAll(" ", "-")}`;
 }
 
-export default encodeIdNameParamHelper;
+export default encodeIdNameParam;
