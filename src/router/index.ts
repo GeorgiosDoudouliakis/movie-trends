@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import decodeUri from "@/helpers/decodeUri";
+import decodeIdNameParam from "@/helpers/decodeIdNameParam";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -62,7 +62,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.params.idName) {
-    document.title = `${decodeUri(to.params.idName as string)} | MovieTrends`;
+    document.title = `${decodeIdNameParam(to.params.idName as string)} | MovieTrends`;
   } else {
     document.title = `${to.meta.title} | MovieTrends`;
   }
