@@ -10,17 +10,18 @@
   import { useRoute, useRouter } from "vue-router";
   import { onMounted, ref } from "vue";
   import decodeQueryParams from "@/helpers/decodeQueryParams.helper";
+  import encodeQueryParams from "@/helpers/encodeQueryParams.helper";
 
   const route = useRoute();
   const router = useRouter();
   const searchTerm = ref<string>("");
 
   function initializeSearchTerm(): void {
-    searchTerm.value = decodeQueryParams(route.query.term as string);
+    searchTerm.value = route.query.term ? decodeQueryParams(route.query.term as string) : "";
   }
 
   function updateQueryParams(): void {
-    router.replace({ name: 'Search', query: { term: searchTerm.value } });
+    router.replace({ name: 'Search', query: { term: encodeQueryParams(searchTerm.value) } });
   }
 
   onMounted(() => initializeSearchTerm());
