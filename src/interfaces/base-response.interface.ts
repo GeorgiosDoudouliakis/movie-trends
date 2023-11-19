@@ -1,6 +1,6 @@
-export interface BaseTopRatedResponse<T> {
+export interface BaseResponse<Item> {
     page: number;
-    results: T[];
+    results: Item[];
     total_pages: number;
     total_results: number;
 }

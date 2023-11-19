@@ -1,4 +1,3 @@
-import { TvSerie } from "@/interfaces";
-import { BaseTopRatedResponse } from "@/views/home/interfaces/base-top-rated-response.interface";
+import { BaseResponse, TvSerie } from "@/interfaces";
 
-export interface TopRatedTvSeriesResponse extends BaseTopRatedResponse<TvSerie> {}
+export type TopRatedTvSeriesResponse = BaseResponse<TvSerie>;
