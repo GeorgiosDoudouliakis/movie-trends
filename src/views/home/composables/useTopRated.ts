@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { readonly, ref } from "vue";
 import { TopRatedItemModel } from "../interfaces";
 import { BaseItem, BaseResponse } from "@/interfaces";
 
@@ -32,5 +32,10 @@ export function useTopRated<ResponseType extends BaseResponse<ItemType>, ItemTyp
         return dateArr[2] + " " + months[`${dateArr[1]}`] + " " + dateArr[0];
     }
 
-    return { items, loading, mappedReleaseDate, topRatedItems$ };
+    return { 
+        items, 
+        loading, 
+        mappedReleaseDate: readonly(mappedReleaseDate), 
+        topRatedItems$: readonly(topRatedItems$) 
+    };
 }
