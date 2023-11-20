@@ -77,6 +77,14 @@
     border-bottom: 1px solid var(--border-color);
   }
 
+  ul > li > a {
+    transition: .8s ease-in-out;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
   .mobile-menu-icon {
     width: 30px;
     height: 20px;
