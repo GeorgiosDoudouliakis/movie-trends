@@ -2,34 +2,34 @@
   <div v-if="!loading" class="flex py-12 wrapper">
     <div class="flex flex-col general-info">
       <div class="mb-8 img-container">
-        <img class="responsive-img" :src="personModel['profile_path']" :alt="personModel['name']" width="250"/>
+        <img class="responsive-img" :src="personModel.profile_path" :alt="personModel.name" width="250"/>
       </div>
       <h3 class="text-xl mb-8">Personal Information</h3>
       <span class="text-xl mb-1">Known for department</span>
-      <span class="text-base mb-4">{{ personModel['known_for_department'] }}</span>
+      <span class="text-base mb-4">{{ personModel.known_for_department }}</span>
       <span class="text-xl mb-1">Birth Day</span>
-      <span class="text-base mb-4">{{ personModel['birthday'] }}</span>
-      <template v-if="personModel['deathday']">
+      <span class="text-base mb-4">{{ personModel.birthday }}</span>
+      <template v-if="personModel.deathday">
         <span class="text-xl mb-1">Death Day</span>
-        <span class="text-base mb-4">{{ personModel['deathday'] }}</span>
+        <span class="text-base mb-4">{{ personModel.deathday }}</span>
       </template>
       <span class="text-xl mb-1">Place of birth</span>
-      <span class="text-base mb-4">{{ personModel['place_of_birth'] }}</span>
+      <span class="text-base mb-4">{{ personModel.place_of_birth }}</span>
       <span class="text-xl mb-1">Also known as</span>
       <ul>
-        <li v-for="known in personModel['also_known_as']">{{ known }}</li>
+        <li v-for="known in personModel.also_known_as">{{ known }}</li>
       </ul>
     </div>
     <div class="info">
       <div class="flex justify-between items-center mb-10">
-        <h2 class="text-2xl">{{ personModel['name'] }}</h2>
+        <h2 class="text-2xl">{{ personModel.name }}</h2>
         <router-link class="btn-primary p-2" :to="{ name: 'People' }">Popular People</router-link>
       </div>
       <span class="inline-flex text-xl mb-6">Biography</span>
-      <p class="mb-10">{{ personModel['biography'] }}</p>
+      <p class="mb-10">{{ personModel.biography }}</p>
       <span class="inline-flex text-xl mb-6">Known for</span>
       <ul>
-        <li class="flex justify-between items-center text-lg p-4 known-for-item" v-for="known in personModel['known_for']" :key="known.id">
+        <li class="flex justify-between items-center text-lg p-4 known-for-item" v-for="known in personModel.known_for" :key="known.id">
           <span>{{ known.title || known.name }}</span>
           <button class="px-3 py-1 btn-secondary">Show More</button>
         </li>
@@ -47,7 +47,7 @@
   import BaseLoader from "@/components/base/BaseLoader.vue";
   import { PersonModel } from "@/views/people/types/person-model.type";
 
-  const personModel = ref<PersonModel | null>(null);
+  const personModel = ref<PersonModel>({} as PersonModel);
   const loading = ref<boolean>(true);
 
   const { idName } = defineProps<{ idName: string }>();

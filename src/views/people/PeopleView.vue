@@ -17,26 +17,27 @@
 
 <script setup lang="ts">
   import { onBeforeUnmount, onMounted, ref } from "vue";
-  import { People, Person } from "@/views/people/interfaces/people-response.interface";
+  import { People } from "@/views/people/interfaces/people-response.interface";
   import BaseCard from "@/components/base/BaseCard.vue";
   import BaseLoader from "@/components/base/BaseLoader.vue";
   import router from "@/router";
   import encodeIdNameParamHelper from "@/helpers/encodeIdNameParam.helper";
+  import { Person } from "@/interfaces";
 
   const people = ref<Person[]>([]);
   const currentPage = ref<number>(1);
   const totalPages = ref<number>(1);
   const loading = ref<boolean>(true);
-  const isOnLoadMore = ref<boolean>(false)
+  const isOnLoadMore = ref<boolean>(false);
 
   function getPopularPeople(page: number) {
     fetch(`https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US&page=${page}`)
         .then(response => response.json())
         .then((response: People) => {
-          const mappedResults = response.results.map((person: Person) => {
+          const mappedResults = (response.results as unknown as Person[]).map((person: Person) => {
             return { ...person, profile_path: `https://image.tmdb.org/t/p/w185/${person.profile_path}` };
           });
-          people.value = [...people.value, ...mappedResults];
+          people.value = [...people.value, ...mappedResults] as Person[];
           currentPage.value = response.page;
           totalPages.value = response.total_pages;
         })
