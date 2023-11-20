@@ -6,12 +6,16 @@
   <div class="py-12 wrapper">
     <template v-if="searchTerm">
       <template v-if="!loading">
+        <template v-if="items.length">
 
+        </template>
+        <p v-else class="text-center text-lg">No data found!</p>
       </template>
-      <div v-else>
+      <div v-else class="flex justify-center">
         <BaseLoader/>
       </div>
     </template>
+    <p v-else class="text-center text-lg">Search for something to see results!</p>
   </div>
 </template>
 
@@ -27,6 +31,7 @@
   const router = useRouter();
   const searchTerm = ref<string>("");
   const loading = ref<boolean>(false);
+  const items = ref<any[]>([]);
   const currentPage = ref<number>(1);
   const totalPages = ref<number>(1);
 
@@ -46,6 +51,7 @@
       .then(response => response.json())
       .then((response: BaseResponse<any>) => {
         console.log(response);
+        items.value = response.results;
         currentPage.value = response.page;
         totalPages.value = response.total_pages;
       })
@@ -53,7 +59,10 @@
       .finally(() => loading.value = false)
   }
 
-  onMounted(() => initializeSearchTerm());
+  onMounted(() => {
+    initializeSearchTerm();
+    getSearchedItems(1);
+  });
 </script>
 
 <style scoped lang="scss">
