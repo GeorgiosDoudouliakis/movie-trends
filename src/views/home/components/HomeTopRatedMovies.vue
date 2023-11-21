@@ -8,8 +8,10 @@
   import { useTopRated } from "../composables/useTopRated";
   import { TopRatedMoviesResponse } from "../interfaces";
   import { Movie } from "@/interfaces";
+  import { useMappedReleaseDate } from "@/composables/useMappedReleaseDate";
 
-  const { items, loading, mappedReleaseDate, topRatedItems$ } = useTopRated<TopRatedMoviesResponse, Movie>();
+  const { items, loading, topRatedItems$ } = useTopRated<TopRatedMoviesResponse, Movie>();
+  const { mappedReleaseDate } = useMappedReleaseDate();
 
   onMounted(() => {
     topRatedItems$("movie")
