@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onBeforeUnmount, onMounted, ref } from "vue";
+  import { onMounted, onUnmounted, ref } from "vue";
 
   const isOnMobile = ref<boolean>(window.matchMedia('(max-width: 767px)').matches);
   const isMobileMenuActive = ref<boolean>(false);
@@ -69,7 +69,7 @@
 
   onMounted(() => window.addEventListener("resize",() => updateMobileRelatedState()));
 
-  onBeforeUnmount(() => window.removeEventListener("resize", updateMobileRelatedState));
+  onUnmounted(() => window.removeEventListener("resize", updateMobileRelatedState));
 </script>
 
 <style scoped lang="scss">

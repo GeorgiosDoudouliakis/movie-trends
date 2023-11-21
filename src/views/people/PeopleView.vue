@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onBeforeUnmount, onMounted, ref } from "vue";
+  import { onMounted, onUnmounted, ref } from "vue";
   import { People } from "@/views/people/interfaces/people-response.interface";
   import BaseCard from "@/components/base/BaseCard.vue";
   import BaseLoader from "@/components/base/BaseLoader.vue";
@@ -66,5 +66,5 @@
     getPopularPeople(1);
   });
 
-  onBeforeUnmount(() => window.removeEventListener('scroll', fetchOnScroll))
+  onUnmounted(() => window.removeEventListener('scroll', fetchOnScroll))
 </script>
