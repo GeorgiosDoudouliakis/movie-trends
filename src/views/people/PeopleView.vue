@@ -21,8 +21,10 @@
   import BaseCard from "@/components/base/BaseCard.vue";
   import BaseLoader from "@/components/base/BaseLoader.vue";
   import router from "@/router";
-  import encodeIdNameParamHelper from "@/helpers/encodeIdNameParam.helper";
   import { Person } from "@/interfaces";
+  import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
+
+  const { encodeIdNameParam } = useEncodingUtilities();
 
   const people = ref<Person[]>([]);
   const currentPage = ref<number>(1);
@@ -58,7 +60,7 @@
   }
 
   function goToPerson(person: Person): void {
-    router.push({ name: 'Person', params: { idName: encodeIdNameParamHelper(person.id, person.name) } });
+    router.push({ name: 'Person', params: { idName: encodeIdNameParam(person.id, person.name) } });
   }
 
   onMounted(() => {

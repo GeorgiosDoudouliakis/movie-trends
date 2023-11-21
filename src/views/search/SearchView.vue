@@ -22,10 +22,13 @@
 <script setup lang="ts">
   import { useRoute, useRouter } from "vue-router";
   import { onMounted, ref } from "vue";
-  import decodeQueryParams from "@/helpers/decodeQueryParams.helper";
-  import encodeQueryParams from "@/helpers/encodeQueryParams.helper";
   import { BaseResponse } from "@/interfaces";
   import BaseLoader from "@/components/base/BaseLoader.vue";
+  import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
+  import { useDecodingUtilities } from "@/composables/useDecodingUtilities";
+
+  const { encodeQueryParams } = useEncodingUtilities();
+  const { decodeQueryParams } = useDecodingUtilities();
 
   const route = useRoute();
   const router = useRouter();

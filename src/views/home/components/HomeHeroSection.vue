@@ -16,7 +16,9 @@
 
 <script setup lang="ts">
   import { computed, ref } from "vue";
-  import encodeQueryParams from "@/helpers/encodeQueryParams.helper";
+  import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
+
+  const { encodeQueryParams } = useEncodingUtilities();
 
   const searchTerm = ref<string>("");
 
