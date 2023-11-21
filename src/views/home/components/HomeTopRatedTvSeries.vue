@@ -6,30 +6,23 @@
   import { onMounted } from "vue";
   import BaseTopRated from "./base/BaseTopRated.vue";
   import { useTopRated } from "../composables/useTopRated";
-  import { TopRatedTvSeriesResponse } from "../interfaces";
+  import { TopRatedItemModel,TopRatedTvSeriesResponse } from "../interfaces";
   import { TvSerie } from "@/interfaces";
   import { useMappedReleaseDate } from "@/composables/useMappedReleaseDate";
 
-  const { items, loading, topRatedItems$ } = useTopRated<TopRatedTvSeriesResponse, TvSerie>();
+  const { items, loading, getTopRatedItems } = useTopRated<TopRatedTvSeriesResponse, TvSerie>();
   const { mappedReleaseDate } = useMappedReleaseDate();
 
-  onMounted(() => {
-    topRatedItems$("tv")
-        .then((tvSeries: TvSerie[]) => {
-          tvSeries.forEach((tvSerie: TvSerie) => {
-            items.value.push({
-              id: tvSerie.id,
-              title: tvSerie.name,
-              description: tvSerie.overview,
-              rate: +Number.parseFloat(tvSerie.vote_average.toString()).toFixed(1),
-              image: `https://image.tmdb.org/t/p/w185/${tvSerie.poster_path}`,
-              releaseDate: mappedReleaseDate(tvSerie.first_air_date)
-            });
-          });
-        })
-        .catch((err) => {
-          console.error(err.message);
-        })
-        .finally(() => loading.value = false)
-  });
+  function itemMapper(item: TvSerie): TopRatedItemModel {
+    return {
+      id: item.id,
+      title: item.name,
+      description: item.overview,
+      rate: +Number.parseFloat(item.vote_average.toString()).toFixed(1),
+      image: `https://image.tmdb.org/t/p/w185/${item.poster_path}`,
+      releaseDate: mappedReleaseDate(item.first_air_date)
+    }
+  }
+
+  onMounted(() => getTopRatedItems("tv", itemMapper));
 </script>

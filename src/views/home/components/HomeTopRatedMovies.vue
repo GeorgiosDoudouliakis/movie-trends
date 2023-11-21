@@ -6,30 +6,23 @@
   import { onMounted } from "vue";
   import BaseTopRated from "./base/BaseTopRated.vue";
   import { useTopRated } from "../composables/useTopRated";
-  import { TopRatedMoviesResponse } from "../interfaces";
+  import { TopRatedItemModel, TopRatedMoviesResponse } from "../interfaces";
   import { Movie } from "@/interfaces";
   import { useMappedReleaseDate } from "@/composables/useMappedReleaseDate";
 
-  const { items, loading, topRatedItems$ } = useTopRated<TopRatedMoviesResponse, Movie>();
+  const { items, loading, getTopRatedItems } = useTopRated<TopRatedMoviesResponse, Movie>();
   const { mappedReleaseDate } = useMappedReleaseDate();
 
-  onMounted(() => {
-    topRatedItems$("movie")
-        .then((movies: Movie[]) => {
-          movies.forEach((movie: Movie) => {
-            items.value.push({
-              id: movie.id,
-              title: movie.title,
-              description: movie.overview,
-              rate: +Number.parseFloat(movie.vote_average.toString()).toFixed(1),
-              image: `https://image.tmdb.org/t/p/w185/${movie.poster_path}`,
-              releaseDate: mappedReleaseDate(movie.release_date)
-            })
-          })
-        })
-        .catch((err) => {
-          console.error(err.message);
-        })
-        .finally(() => loading.value = false)
-  });
+  function itemMapper(item: Movie): TopRatedItemModel {
+    return {
+      id: item.id,
+      title: item.title,
+      description: item.overview,
+      rate: +Number.parseFloat(item.vote_average.toString()).toFixed(1),
+      image: `https://image.tmdb.org/t/p/w185/${item.poster_path}`,
+      releaseDate: mappedReleaseDate(item.release_date)
+    }
+  }
+
+  onMounted(() => getTopRatedItems("movie", itemMapper));
 </script>
