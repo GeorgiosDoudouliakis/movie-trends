@@ -1,42 +1,32 @@
 <template>
-  <div class="mb-6 cursor-pointer card-container">
-    <div class="img-container">
-      <img class="responsive-img" :src="image.src" :alt="image.alt">
-    </div>
-    <div class="flex flex-col items-center px-2 py-4">
-      <h3>{{ name }}</h3>
-      <slot></slot>
-    </div>
+  <div class="flex mb-6 cursor-pointer card-container"
+    :class="{ 'flex-col': direction === 'vertical', 'flex-row': direction === 'horizontal' }"
+    :style="{ width: direction === 'vertical' ? image.width + 'px' : '100%' }">
+      <div class="img-container" :style="{ width: image.width + 'px' }">
+        <img class="responsive-img" :src="image.src" :alt="image.alt">
+      </div>
+      <div class="flex flex-col items-center px-2 py-4" :class="{ 'ml-4': direction === 'horizontal' }">
+        <h3 class="text-lg text-center">{{ name }}</h3>
+        <slot></slot>
+      </div>
   </div>
 </template>
 
 <script setup lang="ts">
   defineProps<{
-    image: { src: string; alt: string },
-    name: string
+    image: { src: string; alt: string, width?: number },
+    name: string,
+    direction: "vertical" | "horizontal"
   }>();
 </script>
 
 <style scoped lang="scss">
   .card-container {
-    width: 185px;
     background: var(--card-bg);
-    border-radius: 16px;
-    transition: all .5s;
+    transition: box-shadow .5s;
 
     &:hover {
-      transform: rotate(-3deg);
       box-shadow: 0 0 10px 5px var(--border-color);
-    }
-
-    > .img-container {
-      width: 185px;
-      height: 278px;
-
-      > img {
-        border-top-left-radius: 16px;
-        border-top-right-radius: 16px;
-      }
     }
   }
 </style>

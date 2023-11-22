@@ -4,7 +4,7 @@
     <template v-if="!loading">
       <div class="flex flex-wrap justify-center gap-6">
         <BaseCard v-for="person in people" :key="person.id" :name="person.original_name"
-          :image="{ src: person.profile_path, alt: person.original_name }"
+          :image="{ src: person.profile_path, alt: person.original_name, width: 185 }" direction="vertical"
           @click="goToPerson(person)">
         </BaseCard>
       </div>
