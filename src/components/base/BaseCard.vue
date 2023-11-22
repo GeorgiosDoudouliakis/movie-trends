@@ -2,11 +2,11 @@
   <div class="flex mb-6 cursor-pointer card-container"
     :class="{ 'flex-col': direction === 'vertical', 'flex-row': direction === 'horizontal' }"
     :style="{ width: direction === 'vertical' ? image.width + 'px' : '100%' }">
-      <div class="img-container" :style="{ width: image.width + 'px' }">
+      <div class="img-container shrink-0" :style="{ width: image.width + 'px' }">
         <img class="responsive-img" :src="image.src" :alt="image.alt">
       </div>
-      <div class="flex flex-col items-center px-2 py-4" :class="{ 'ml-4': direction === 'horizontal' }">
-        <h3 class="text-lg text-center">{{ name }}</h3>
+      <div class="flex flex-col p-4 grow-0 card-content" :class="{ 'ml-4': direction === 'horizontal' }">
+        <h3 class="text-lg" :class="{ 'text-center': direction === 'vertical' }">{{ name }}</h3>
         <slot></slot>
       </div>
   </div>
@@ -28,5 +28,9 @@
     &:hover {
       box-shadow: 0 0 10px 5px var(--border-color);
     }
+  }
+
+  .card-content > *:not(:last-child) {
+    margin-bottom: 15px;
   }
 </style>
