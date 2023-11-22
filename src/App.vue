@@ -102,6 +102,22 @@
     object-position: center;
   }
 
+  .text-fade {
+    position: relative;
+    height: 72px;
+    overflow: hidden;
+
+    &::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      content: '';
+      width: 100%;
+      height: 24px;
+      background: linear-gradient(to right, rgba(0,0,0,0), #202336);
+    }
+  }
+
   // Carousel style overwrites
   .carousel__prev,
   .carousel__next {

@@ -5,7 +5,7 @@
       <div class="img-container shrink-0" :style="{ width: image.width + 'px' }">
         <img class="responsive-img" :src="image.src" :alt="image.alt">
       </div>
-      <div class="flex flex-col p-4 grow-0 card-content" :class="{ 'ml-4': direction === 'horizontal' }">
+      <div class="flex flex-col p-4 grow-0 card-content" :class="{ 'ml-2': direction === 'horizontal' }">
         <h3 class="text-lg" :class="{ 'text-center': direction === 'vertical' }">{{ name }}</h3>
         <slot></slot>
       </div>
