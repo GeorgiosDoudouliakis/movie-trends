@@ -24,10 +24,6 @@
 
     > .img-container {
       height: 278px;
-
-      > img {
-        border-radius: 10px;
-      }
     }
 
     > span {
@@ -35,8 +31,6 @@
       right: 0;
       color: var(--lighter-black-color);
       background: var(--primary-color);
-      border-top-right-radius: 10px;
-      border-bottom-left-radius: 10px;
     }
   }
 </style>

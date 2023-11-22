@@ -103,10 +103,6 @@
         display: initial;
         width: 250px;
       }
-
-      > img {
-        border-radius: 16px;
-      }
     }
   }
 
