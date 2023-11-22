@@ -52,33 +52,28 @@
 
   const { idName } = defineProps<{ idName: string }>();
 
-  async function getData() {
+  function getData() {
     const paramsArr = idName.split("-");
 
-    try {
-      const getPerson = await fetch(`https://api.themoviedb.org/3/search/person?api_key=803a77b2748b6f5d6363b4fa92bfd870&query=${paramsArr.slice(1).join(" ")}&language=en-US&page=1`);
-      const getPersonDetails = await fetch(`https://api.themoviedb.org/3/person/${+paramsArr[0]}?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US`);
-      const person = await getPerson.json();
-      const personDetails = await getPersonDetails.json();
-
-      personModel.value = {
-        name: person.results[0].name,
-        known_for: person.results[0].known_for,
-        profile_path: `https://image.tmdb.org/t/p/w185/${person.results[0].profile_path}`,
-        biography: personDetails.biography,
-        birthday: personDetails.birthday,
-        deathday: personDetails.deathday,
-        place_of_birth: personDetails.place_of_birth,
-        known_for_department: personDetails.known_for_department,
-        also_known_as: personDetails.also_known_as
-      }
-    }
-    catch (err) {
-      console.error(err);
-    }
-    finally {
-      loading.value = false;
-    }
+    Promise.all([
+      fetch(`https://api.themoviedb.org/3/search/person?api_key=803a77b2748b6f5d6363b4fa92bfd870&query=${paramsArr.slice(1).join(" ")}&language=en-US&page=1`),
+      fetch(`https://api.themoviedb.org/3/person/${+paramsArr[0]}?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US`)
+    ]).then(responses => Promise.all(responses.map(response => response.json())))
+      .then(([person, personDetails]) => {
+        personModel.value = {
+          name: person.results[0].name,
+          known_for: person.results[0].known_for,
+          profile_path: `https://image.tmdb.org/t/p/w185/${person.results[0].profile_path}`,
+          biography: personDetails.biography,
+          birthday: personDetails.birthday,
+          deathday: personDetails.deathday,
+          place_of_birth: personDetails.place_of_birth,
+          known_for_department: personDetails.known_for_department,
+          also_known_as: personDetails.also_known_as
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally(() => loading.value = false)
   }
 
   onMounted(() => getData());
