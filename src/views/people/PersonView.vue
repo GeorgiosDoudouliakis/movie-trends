@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <div v-else class="flex justify-center pt-20">
+  <div v-else class="flex justify-center items-center loader-container">
     <BaseLoader />
   </div>
 </template>
@@ -131,5 +131,13 @@
 
   .known-for-item:not(:last-of-type) {
     margin-bottom: 20px;
+  }
+
+  .loader-container {
+    min-height: calc(100vh - 117px);
+
+    @media(min-width: 768px) {
+      min-height: calc(100vh - 109px);
+    }
   }
 </style>

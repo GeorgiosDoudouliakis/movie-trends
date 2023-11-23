@@ -9,7 +9,7 @@
         </BaseCard>
       </div>
     </template>
-    <div v-if="loading || isOnLoadMore" class="flex justify-center items-center pt-4">
+    <div v-if="loading || isOnLoadMore" class="flex justify-center items-center loader-container">
       <BaseLoader />
     </div>
   </div>
@@ -37,3 +37,13 @@
     router.push({ name: 'Person', params: { idName: encodeIdNameParam(person.id, person.name) }});
   }
 </script>
+
+<style scoped lang="scss">
+  .loader-container {
+    min-height: calc(100vh - 303px);
+
+    @media(min-width: 768px) {
+      min-height: calc(100vh - 295px);
+    }
+  }
+</style>
