@@ -8,10 +8,10 @@
   import { useTopRated } from "../composables/useTopRated";
   import { TopRatedItemModel,TopRatedTvSeriesResponse } from "../interfaces";
   import { TvSerie } from "@/interfaces";
-  import { useMappedReleaseDate } from "@/composables/useMappedReleaseDate";
+  import { useMapReleaseDate } from "@/composables/useMapReleaseDate";
 
   const { items, loading, getTopRatedItems } = useTopRated<TopRatedTvSeriesResponse, TvSerie>();
-  const { mappedReleaseDate } = useMappedReleaseDate();
+  const { mapReleaseDate } = useMapReleaseDate();
 
   function itemMapper(item: TvSerie): TopRatedItemModel {
     return {
@@ -20,7 +20,7 @@
       description: item.overview,
       rate: +Number.parseFloat(item.vote_average.toString()).toFixed(1),
       image: `https://image.tmdb.org/t/p/w185/${item.poster_path}`,
-      releaseDate: mappedReleaseDate(item.first_air_date)
+      releaseDate: mapReleaseDate(item.first_air_date)
     }
   }
 
