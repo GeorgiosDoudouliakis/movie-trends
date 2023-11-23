@@ -3,9 +3,9 @@
     <h2 class="text-2xl text-center mb-10">Popular People</h2>
     <template v-if="!loading">
       <div class="flex flex-wrap justify-center gap-6">
-        <BaseCard v-for="person in people" :key="person.id" :name="person.original_name"
+        <BaseCard v-for="person in items" :key="person.id" :name="person.original_name"
           :image="{ src: person.profile_path, alt: person.original_name, width: 185 }" direction="vertical"
-          @click="goToPerson(person)">
+          @click="goToItem(person)">
         </BaseCard>
       </div>
     </template>
@@ -16,57 +16,17 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, onUnmounted, ref } from "vue";
   import { People } from "@/views/people/interfaces/people-response.interface";
   import BaseCard from "@/components/base/BaseCard.vue";
   import BaseLoader from "@/components/base/BaseLoader.vue";
-  import router from "@/router";
   import { Person } from "@/interfaces";
-  import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
+  import { useInfiniteScroll } from "@/composables/useInfiniteScroll";
 
-  const { encodeIdNameParam } = useEncodingUtilities();
+  const { items, loading, isOnLoadMore, goToItem } = useInfiniteScroll<People, Person>('https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US', itemsMapper);
 
-  const people = ref<Person[]>([]);
-  const currentPage = ref<number>(1);
-  const totalPages = ref<number>(1);
-  const loading = ref<boolean>(true);
-  const isOnLoadMore = ref<boolean>(false);
-
-  function getPopularPeople(page: number) {
-    fetch(`https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US&page=${page}`)
-        .then(response => response.json())
-        .then((response: People) => {
-          const mappedResults = (response.results as unknown as Person[]).map((person: Person) => {
-            return { ...person, profile_path: `https://image.tmdb.org/t/p/w185/${person.profile_path}` };
-          });
-          people.value = [...people.value, ...mappedResults] as Person[];
-          currentPage.value = response.page;
-          totalPages.value = response.total_pages;
-        })
-        .catch(err => console.error(err))
-        .finally(() => {
-          loading.value = false;
-          if (isOnLoadMore) isOnLoadMore.value = false;
-        });
+  function itemsMapper(items: Person[]): Person[] {
+    return items.map((item: Person) => {
+      return { ...item, profile_path: `https://image.tmdb.org/t/p/w185/${item.profile_path}` };
+    });
   }
-
-  function fetchOnScroll(): void {
-    if (
-        document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight &&
-        currentPage.value + 1 <= totalPages.value) {
-          isOnLoadMore.value = true;
-          getPopularPeople(currentPage.value + 1);
-    }
-  }
-
-  function goToPerson(person: Person): void {
-    router.push({ name: 'Person', params: { idName: encodeIdNameParam(person.id, person.name) } });
-  }
-
-  onMounted(() => {
-    window.addEventListener('scroll', () => fetchOnScroll());
-    getPopularPeople(1);
-  });
-
-  onUnmounted(() => window.removeEventListener('scroll', fetchOnScroll))
 </script>
