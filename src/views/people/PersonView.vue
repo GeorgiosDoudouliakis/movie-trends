@@ -40,7 +40,7 @@
       <template v-if="personModel.known_for.length">
         <span class="inline-flex text-xl mb-6">Known for</span>
         <div>
-          <BaseCard class="known-for-item" v-for="known in personModel.known_for" :key="known.id" :image="{ src: `https://image.tmdb.org/t/p/w185/${known.poster_path || known.profile_path}`,
+          <BaseCard class="known-for-item" v-for="known in personModel.known_for" :key="known.id" :image="{ src: mapPosterPath(185, known.poster_path || known.profile_path),
           alt: known.title || known.name, width: 100 }" :name="known.title || known.name" direction="horizontal">
             <p class="text-fade">{{ known['overview'] }}</p>
           </BaseCard>
@@ -59,11 +59,14 @@
   import BaseLoader from "@/components/base/BaseLoader.vue";
   import { PersonModel } from "@/views/people/types/person-model.type";
   import BaseCard from "@/components/base/BaseCard.vue";
+  import { useMapPosterPath } from "@/composables/useMapPosterPath";
 
   const personModel = ref<PersonModel>({} as PersonModel);
   const loading = ref<boolean>(true);
 
   const { idName } = defineProps<{ idName: string }>();
+
+  const { mapPosterPath } = useMapPosterPath();
 
   function getData() {
     const paramsArr = idName.split("-");
@@ -76,7 +79,7 @@
         personModel.value = {
           name: person.results[0].name,
           known_for: person.results[0].known_for,
-          profile_path: `https://image.tmdb.org/t/p/w185/${person.results[0].profile_path}`,
+          profile_path: mapPosterPath(185, person.results[0].profile_path),
           biography: personDetails.biography,
           birthday: personDetails.birthday,
           deathday: personDetails.deathday,

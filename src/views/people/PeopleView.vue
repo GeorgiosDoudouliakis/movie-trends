@@ -23,13 +23,15 @@
   import { useInfiniteScroll } from "@/composables/useInfiniteScroll";
   import router from "@/router";
   import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
+  import { useMapPosterPath } from "@/composables/useMapPosterPath";
 
+  const { mapPosterPath } = useMapPosterPath();
   const { encodeIdNameParam } = useEncodingUtilities();
   const { items, loading, isOnLoadMore } = useInfiniteScroll<People, Person>('https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US', itemsMapper);
 
   function itemsMapper(items: Person[]): Person[] {
     return items.map((item: Person) => {
-      return { ...item, profile_path: `https://image.tmdb.org/t/p/w185/${item.profile_path}` };
+      return { ...item, profile_path: mapPosterPath(185, item.profile_path) };
     });
   }
 
