@@ -1,17 +1,13 @@
 import { onMounted, onUnmounted, readonly, Ref, ref } from "vue";
-import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
 import { BaseResponse } from "@/interfaces";
-import router from "@/router";
 
-export function useInfiniteScroll<ResponseType, ItemType extends { id: number; name: string; profile_path: string; }>
+export function useInfiniteScroll<ResponseType, ItemType extends { id: number; name: string; }>
     (url: string, itemsMapper: (items: ItemType[]) => ItemType[]) {
     const items = ref<ItemType[]>([]) as Ref<ItemType[]>;
     const currentPage = ref<number>(1);
     const totalPages = ref<number>(1);
     const loading = ref<boolean>(true);
     const isOnLoadMore = ref<boolean>(false);
-
-    const { encodeIdNameParam } = useEncodingUtilities();
 
     function getItems(page: number) {
         fetch(`${url}&page=${page}`)
@@ -38,13 +34,6 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
         }
     }
 
-    function goToItem(item: ItemType): void {
-        router.push({
-            path: `${item}`,
-            params: { idName: encodeIdNameParam(item.id, item.name) }
-        });
-    }
-
     onMounted(() => {
         window.addEventListener('scroll', () => fetchOnScroll());
         getItems(1);
@@ -55,7 +44,6 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
     return {
         items,
         loading: readonly(loading),
-        isOnLoadMore: readonly(isOnLoadMore),
-        goToItem
+        isOnLoadMore: readonly(isOnLoadMore)
     };
 }

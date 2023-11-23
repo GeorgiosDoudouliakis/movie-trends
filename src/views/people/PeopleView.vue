@@ -5,7 +5,7 @@
       <div class="flex flex-wrap justify-center gap-6">
         <BaseCard v-for="person in items" :key="person.id" :name="person.original_name"
           :image="{ src: person.profile_path, alt: person.original_name, width: 185 }" direction="vertical"
-          @click="goToItem(person)">
+          @click="goToPerson(person)">
         </BaseCard>
       </div>
     </template>
@@ -21,12 +21,19 @@
   import BaseLoader from "@/components/base/BaseLoader.vue";
   import { Person } from "@/interfaces";
   import { useInfiniteScroll } from "@/composables/useInfiniteScroll";
+  import router from "@/router";
+  import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
 
-  const { items, loading, isOnLoadMore, goToItem } = useInfiniteScroll<People, Person>('https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US', itemsMapper);
+  const { encodeIdNameParam } = useEncodingUtilities();
+  const { items, loading, isOnLoadMore } = useInfiniteScroll<People, Person>('https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US', itemsMapper);
 
   function itemsMapper(items: Person[]): Person[] {
     return items.map((item: Person) => {
       return { ...item, profile_path: `https://image.tmdb.org/t/p/w185/${item.profile_path}` };
     });
+  }
+
+  function goToPerson(person: Person): void {
+    router.push({ name: 'Person', params: { idName: encodeIdNameParam(person.id, person.name) }});
   }
 </script>
