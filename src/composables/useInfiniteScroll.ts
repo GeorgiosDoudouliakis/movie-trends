@@ -2,32 +2,35 @@ import { onMounted, onUnmounted, readonly, Ref, ref } from "vue";
 import { BaseResponse } from "@/interfaces";
 
 export function useInfiniteScroll<ResponseType, ItemType extends { id: number; name: string; }>
-    (url: string, itemsMapper: (items: ItemType[]) => ItemType[], params?: { [key: string]: string }) {
+    (url: string, itemsMapper: (items: ItemType[]) => ItemType[]) {
+    const fetchUrl = ref<string>("");
     const items = ref<ItemType[]>([]) as Ref<ItemType[]>;
+    const extraParams = ref<{ [key: string]: any } | null>(null);
     const currentPage = ref<number>(1);
     const totalPages = ref<number>(1);
     const loading = ref<boolean>(true);
     const isOnLoadMore = ref<boolean>(false);
 
-    function requestUrl(page: number): string {
-        let request = `${url}&page=${page}`;
+    function constructedRequestUrl() { 
+        fetchUrl.value = `${url}&page=${currentPage.value}`;
 
-        if(params) {    
-            Object.keys(params).forEach(param => {
-                request += `&${param}=${params[param]}`;
+        if(extraParams.value) {
+            Object.keys(extraParams.value).forEach(param => {
+                fetchUrl.value += `&${param}=${(extraParams.value as { [key: string]: any })[param]}`;
             });
         }
 
-        return request;
+        return fetchUrl.value;
     }
 
-    function getItems(page: number) {
-        fetch(requestUrl(page))
+    function getItems(params?: { [key: string]: any }) {
+        if(params) extraParams.value = { ...params };
+
+        fetch(constructedRequestUrl())
             .then(response => response.json())
             .then((response: BaseResponse<ResponseType>) => {
                 const mappedResults = itemsMapper(response.results as unknown as ItemType[]);
                 items.value = [...items.value, ...mappedResults] as ItemType[];
-                currentPage.value = response.page;
                 totalPages.value = response.total_pages;
             })
             .catch(err => console.error(err))
@@ -41,14 +44,18 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
         if (
             document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight &&
             currentPage.value + 1 <= totalPages.value) {
-            isOnLoadMore.value = true;
-            getItems(currentPage.value + 1);
+                fetchUrl.value = "";
+                isOnLoadMore.value = true;
+                currentPage.value = currentPage.value + 1;
+
+                if(extraParams.value) getItems({ ...extraParams });
+                else getItems();
         }
     }
 
     onMounted(() => {
         window.addEventListener('scroll', () => fetchOnScroll());
-        getItems(1);
+        getItems();
     });
 
     onUnmounted(() => window.removeEventListener('scroll', fetchOnScroll))
@@ -56,6 +63,7 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
     return {
         items,
         loading: readonly(loading),
-        isOnLoadMore: readonly(isOnLoadMore)
+        isOnLoadMore: readonly(isOnLoadMore),
+        getItems
     };
 }
