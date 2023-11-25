@@ -9,7 +9,7 @@
         </BaseCard>
       </div>
     </template>
-    <div v-if="loading || isOnLoadMore" class="flex justify-center items-center loader-container">
+    <div v-if="loading || isOnLoadMore" class="flex justify-center items-center">
       <BaseLoader />
     </div>
   </div>
@@ -24,10 +24,11 @@
   import router from "@/router";
   import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
   import { useMapPosterPath } from "@/composables/useMapPosterPath";
+  import { onMounted } from "vue";
 
   const { mapPosterPath } = useMapPosterPath();
   const { encodeIdNameParam } = useEncodingUtilities();
-  const { items, loading, isOnLoadMore } = useInfiniteScroll<People, Person>('https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US', itemsMapper);
+  const { items, loading, isOnLoadMore, getItems } = useInfiniteScroll<People, Person>('https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US', itemsMapper);
 
   function itemsMapper(items: Person[]): Person[] {
     return items.map((item: Person) => {
@@ -38,14 +39,6 @@
   function goToPerson(person: Person): void {
     router.push({ name: 'Person', params: { idName: encodeIdNameParam(person.id, person.name) }});
   }
+
+  onMounted(() => getItems())
 </script>
-
-<style scoped lang="scss">
-  .loader-container {
-    min-height: calc(100vh - 303px);
-
-    @media(min-width: 768px) {
-      min-height: calc(100vh - 295px);
-    }
-  }
-</style>
