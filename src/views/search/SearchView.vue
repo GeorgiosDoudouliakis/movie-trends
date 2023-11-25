@@ -18,6 +18,7 @@
         </BaseCard>
       </template>
     </template>
+    <p v-if="msg" class="text-center">{{ msg }}</p>
     <div v-if="loading || isOnLoadMore" class="flex justify-center">
       <BaseLoader/>
     </div>
@@ -45,7 +46,7 @@
   const { decodeQueryParams } = useDecodingUtilities();
   const { mapPosterPath } = useMapPosterPath();
   const { mapReleaseDate } = useMapReleaseDate();
-  const { items, currentPage, loading, isOnLoadMore, getItems } = useInfiniteScroll<BaseResponse<any>, any>('https://api.themoviedb.org/3/search/multi?api_key=803a77b2748b6f5d6363b4fa92bfd870', itemsMapper);
+  const { items, msg, currentPage, loading, isOnLoadMore, getItems } = useInfiniteScroll<BaseResponse<any>, any>('https://api.themoviedb.org/3/search/multi?api_key=803a77b2748b6f5d6363b4fa92bfd870', itemsMapper);
 
   function initializeSearchTerm(): void {
     searchTerm.value = route.query.term ? decodeQueryParams(route.query.term as string) : "";

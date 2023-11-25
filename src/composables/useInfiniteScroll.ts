@@ -5,6 +5,7 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
     (url: string, itemsMapper: (items: ItemType[]) => ItemType[]) {
     const fetchUrl = ref<string>("");
     const items = ref<ItemType[]>([]) as Ref<ItemType[]>;
+    const msg = ref<string>("");
     const extraParams = ref<{ [key: string]: any } | null>(null);
     const currentPage = ref<number>(1);
     const totalPages = ref<number>(1);
@@ -34,6 +35,8 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
                 const mappedResults = itemsMapper(response.results as unknown as ItemType[]);
                 items.value = [...items.value, ...mappedResults] as ItemType[];
                 totalPages.value = response.total_pages;
+
+                if(!items.value.length) msg.value = "No data found";
             })
             .catch(err => console.error(err))
             .finally(() => {
@@ -59,6 +62,7 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
 
     return {
         items,
+        msg: readonly(msg),
         currentPage,
         loading,
         isOnLoadMore: readonly(isOnLoadMore),
