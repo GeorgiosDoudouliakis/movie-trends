@@ -6,7 +6,7 @@
       <p class="text-xl mb-6">Explore movies, tv series and details for them from anywhere and anytime</p>
       <div class="flex search-container">
         <input type="text" placeholder="Search for movies, tv series or persons..." v-model="searchTerm" />
-        <button class="btn-primary">
+        <button class="btn-primary" :class="{ 'btn-disabled': !searchTerm }" :disabled="!searchTerm">
           <router-link :to="{ name: 'Search', query: { term } }">Search</router-link>
         </button>
       </div>

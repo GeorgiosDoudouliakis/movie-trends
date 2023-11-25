@@ -95,6 +95,11 @@
     }
   }
 
+  .btn-disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
+
   .responsive-img {
     width: 100%;
     height: 100%;
