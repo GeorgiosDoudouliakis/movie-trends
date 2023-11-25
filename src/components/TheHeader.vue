@@ -2,7 +2,7 @@
   <header :class="{ 'py-4': isOnMobile }" class="wrapper">
     <nav class="flex justify-between items-center">
       <h1 class="text-2xl font-semibold tracking-widest">
-        <router-link to="/">MOVIETRENDS</router-link>
+        <router-link to="/">MovieTrends</router-link>
       </h1>
 
       <div class="flex items-center">
