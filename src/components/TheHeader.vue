@@ -78,10 +78,16 @@
   }
 
   ul > li > a {
-    transition: .8s ease-in-out;
+    position: relative;
 
-    &:hover {
-      color: var(--primary-color);
+    &:hover::after {
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+      content: "";
+      width: calc(100% - 20px);
+      height: 1px;
+      background: var(--primary-color);
     }
   }
 
@@ -131,17 +137,7 @@
   }
 
   .router-link-exact-active:not(h1 > a, a:has(> svg)) {
-    @apply text-primary;
-    position: relative;
-
-    &::after {
-      position: absolute;
-      bottom: 0;
-      left: 10px;
-      content: "";
-      width: calc(100% - 20px);
-      height: 1px;
-      background: var(--primary-color);
-    }
+    @apply bg-primary;
+    @apply text-lighter-black;
   }
 </style>
