@@ -8,7 +8,7 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
     const extraParams = ref<{ [key: string]: any } | null>(null);
     const currentPage = ref<number>(1);
     const totalPages = ref<number>(1);
-    const loading = ref<boolean>(true);
+    const loading = ref<boolean>(false);
     const isOnLoadMore = ref<boolean>(false);
 
     function constructedRequestUrl() { 
@@ -24,6 +24,8 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
     }
 
     function getItems(params?: { [key: string]: any }) {
+        loading.value = isOnLoadMore.value ? false : true;
+
         if(params) extraParams.value = { ...params };
 
         fetch(constructedRequestUrl())
