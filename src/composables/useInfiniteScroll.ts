@@ -47,22 +47,18 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
                 fetchUrl.value = "";
                 isOnLoadMore.value = true;
                 currentPage.value = currentPage.value + 1;
-
-                if(extraParams.value) getItems({ ...extraParams });
-                else getItems();
+                getItems({ ...extraParams.value });
         }
     }
 
-    onMounted(() => {
-        window.addEventListener('scroll', () => fetchOnScroll());
-        getItems();
-    });
+    onMounted(() => window.addEventListener('scroll', () => fetchOnScroll()));
 
     onUnmounted(() => window.removeEventListener('scroll', fetchOnScroll))
 
     return {
         items,
-        loading: readonly(loading),
+        currentPage,
+        loading,
         isOnLoadMore: readonly(isOnLoadMore),
         getItems
     };
