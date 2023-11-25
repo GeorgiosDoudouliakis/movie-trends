@@ -1,8 +1,7 @@
 import { onMounted, onUnmounted, readonly, Ref, ref } from "vue";
 import { BaseResponse } from "@/interfaces";
 
-export function useInfiniteScroll<ResponseType, ItemType extends { id: number; name: string; }>
-    (url: string, itemsMapper: (items: ItemType[]) => ItemType[]) {
+export function useInfiniteScroll<ResponseType, ItemType extends { id: number; name: string; }>(url: string) {
     const fetchUrl = ref<string>("");
     const items = ref<ItemType[]>([]) as Ref<ItemType[]>;
     const msg = ref<string>("");
@@ -32,8 +31,7 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
         fetch(constructedRequestUrl())
             .then(response => response.json())
             .then((response: BaseResponse<ResponseType>) => {
-                const mappedResults = itemsMapper(response.results as unknown as ItemType[]);
-                items.value = [...items.value, ...mappedResults] as ItemType[];
+                items.value = [...items.value, ...response.results] as unknown as ItemType[];
                 totalPages.value = response.total_pages;
 
                 if(!items.value.length) msg.value = "No data found";

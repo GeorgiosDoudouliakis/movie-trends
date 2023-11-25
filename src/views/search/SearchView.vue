@@ -34,7 +34,6 @@
   import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
   import { useDecodingUtilities } from "@/composables/useDecodingUtilities";
   import { useInfiniteScroll } from "@/composables/useInfiniteScroll";
-  import { useMapPosterPath } from "@/composables/useMapPosterPath";
   import { useMapReleaseDate } from "@/composables/useMapReleaseDate";
   import { MediaType } from "./enums/media-type.enum";
 
@@ -44,9 +43,8 @@
 
   const { encodeQueryParams } = useEncodingUtilities();
   const { decodeQueryParams } = useDecodingUtilities();
-  const { mapPosterPath } = useMapPosterPath();
   const { mapReleaseDate } = useMapReleaseDate();
-  const { items, msg, currentPage, loading, isOnLoadMore, getItems } = useInfiniteScroll<BaseResponse<any>, any>('https://api.themoviedb.org/3/search/multi?api_key=803a77b2748b6f5d6363b4fa92bfd870', itemsMapper);
+  const { items, msg, currentPage, loading, isOnLoadMore, getItems } = useInfiniteScroll<BaseResponse<any>, any>('https://api.themoviedb.org/3/search/multi?api_key=803a77b2748b6f5d6363b4fa92bfd870');
 
   function initializeSearchTerm(): void {
     searchTerm.value = route.query.term ? decodeQueryParams(route.query.term as string) : "";
@@ -54,16 +52,6 @@
   
   function updateQueryParams(): void {
     router.replace({ name: 'Search', query: { term: encodeQueryParams(searchTerm.value) } });
-  }
-
-  function itemsMapper(items: any[]): any[] {
-    return items.map((item: any) => {
-      if(item.poster_path) {
-        return { ...item, poster_path: mapPosterPath(185, item.poster_path) };
-      } else if(item.profile_path) {
-        return { ...item, profile_path: mapPosterPath(185, item.profile_path) };
-      }
-    });
   }
 
   function search(): void {

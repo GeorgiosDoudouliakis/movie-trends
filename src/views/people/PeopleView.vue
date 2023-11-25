@@ -23,18 +23,10 @@
   import { useInfiniteScroll } from "@/composables/useInfiniteScroll";
   import router from "@/router";
   import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
-  import { useMapPosterPath } from "@/composables/useMapPosterPath";
   import { onMounted } from "vue";
 
-  const { mapPosterPath } = useMapPosterPath();
   const { encodeIdNameParam } = useEncodingUtilities();
-  const { items, loading, isOnLoadMore, getItems } = useInfiniteScroll<People, Person>('https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US', itemsMapper);
-
-  function itemsMapper(items: Person[]): Person[] {
-    return items.map((item: Person) => {
-      return { ...item, profile_path: mapPosterPath(185, item.profile_path) };
-    });
-  }
+  const { items, loading, isOnLoadMore, getItems } = useInfiniteScroll<People, Person>('https://api.themoviedb.org/3/person/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US');
 
   function goToPerson(person: Person): void {
     router.push({ name: 'Person', params: { idName: encodeIdNameParam(person.id, person.name) }});

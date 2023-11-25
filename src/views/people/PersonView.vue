@@ -2,7 +2,8 @@
   <div v-if="!loading" class="flex py-12 wrapper">
     <div class="flex flex-col general-info">
       <div class="mb-8 img-container">
-        <img class="responsive-img" :src="personModel.profile_path" :alt="personModel.name" width="250"/>
+        <img v-if="personModel.profile_path" class="responsive-img" :src="personModel.profile_path" :alt="personModel.name" width="250"/>
+        <img v-else class="responsive-img" src="../../assets/no_image_available.jpg" width="250"/>
       </div>
       <h3 class="text-xl mb-8">Personal Information</h3>
       <template v-if="personModel.known_for_department">
@@ -40,7 +41,8 @@
       <template v-if="personModel.known_for.length">
         <span class="inline-flex text-xl mb-6">Known for</span>
         <div>
-          <BaseCard class="known-for-item" v-for="known in personModel.known_for" :key="known.id" :image="{ src: mapPosterPath(185, known.poster_path || known.profile_path),
+          <BaseCard class="known-for-item" v-for="known in personModel.known_for" :key="known.id" 
+          :image="{ src: known.poster_path || known.profile_path,
           alt: known.title || known.name, width: 100 }" :name="known.title || known.name" direction="horizontal">
             <p class="text-fade">{{ known['overview'] }}</p>
           </BaseCard>
@@ -79,7 +81,7 @@
         personModel.value = {
           name: person.results[0].name,
           known_for: person.results[0].known_for,
-          profile_path: mapPosterPath(185, person.results[0].profile_path),
+          profile_path: person.results[0].profile_path && mapPosterPath(185, person.results[0].profile_path),
           biography: personDetails.biography,
           birthday: personDetails.birthday,
           deathday: personDetails.deathday,
@@ -118,6 +120,7 @@
       @media(min-width: 1024px) {
         display: initial;
         width: 250px;
+        height: 375.67px;
       }
     }
   }

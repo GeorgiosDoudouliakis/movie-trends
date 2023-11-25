@@ -2,8 +2,10 @@
   <div class="flex mb-6 cursor-pointer card-container"
     :class="{ 'flex-col': direction === 'vertical', 'flex-row': direction === 'horizontal' }"
     :style="{ width: direction === 'vertical' ? image.width + 'px' : '100%' }">
-      <div class="img-container shrink-0" :style="{ width: image.width + 'px' }">
-        <img class="responsive-img" :src="image.src" :alt="image.alt">
+      <div class="img-container shrink-0" :class="{ 'height-when-vertical': direction === 'vertical' }" 
+      :style="{ width: image.width + 'px' }">
+        <img v-if="image.src" class="responsive-img" :src="mapPosterPath(185, image.src)" :alt="image.alt">
+        <img v-else class="responsive-img" src="../../assets/no_image_available.jpg">
       </div>
       <div class="flex flex-col p-4 grow-0 card-content" :class="{ 'ml-2': direction === 'horizontal' }">
         <h3 class="text-lg" :class="{ 'text-center': direction === 'vertical' }">{{ name }}</h3>
@@ -13,6 +15,10 @@
 </template>
 
 <script setup lang="ts">
+  import { useMapPosterPath } from '@/composables/useMapPosterPath';
+
+  const { mapPosterPath } = useMapPosterPath();
+
   defineProps<{
     image: { src: string; alt: string, width?: number },
     name: string,
@@ -27,6 +33,10 @@
 
     &:hover {
       box-shadow: 0 0 10px 5px var(--border-color);
+    }
+
+    > .img-container.height-when-vertical {
+      height: 278px;
     }
   }
 
