@@ -1,21 +1,26 @@
 <template>
   <div class="flex items-center p-2 search-input">
     <input class="p-2" type="text" placeholder="Search" v-model="searchTerm" @input="updateQueryParams">
-    <button class="p-2 ml-4 btn-primary">Search</button>
+    <button class="p-2 ml-4 btn-primary" :class="{ 'btn-disabled': !searchTerm }" :disabled="!searchTerm" @click="search()">Search</button>
   </div>
   <div class="py-12 wrapper">
-    <template v-if="searchTerm">
-      <template v-if="!loading">
-        <template v-if="items.length">
-
-        </template>
-        <p v-else class="text-center text-lg">No data found!</p>
+    <template v-if="!loading">
+      <template v-for="item in items" :key="item?.id">
+        <BaseCard v-if="item?.media_type == MediaType.MOVIE" :name="item?.title" :image="{ src: item?.poster_path, alt: item?.title, width: 100 }" direction="horizontal">
+          <span v-if="item?.release_date" class="italic mb-2">{{ mapReleaseDate(item?.release_date) }}</span>
+          <p v-if="item?.overview" class="text-fade">{{ item?.overview }}</p>
+        </BaseCard>
+        <BaseCard v-if="item?.media_type == MediaType.TV" :name="item?.name" :image="{ src: item?.poster_path, alt: item?.name, width: 100 }" direction="horizontal">
+          <p v-if="item?.overview" class="text-fade">{{ item?.overview }}</p>
+        </BaseCard>
+        <BaseCard v-if="item?.media_type == MediaType.PERSON" :name="item?.name" :image="{ src: item?.profile_path, alt: item?.name, width: 100 }" direction="horizontal">
+          <span class="italic">{{ item?.known_for_department }}</span>
+        </BaseCard>
       </template>
-      <div v-else class="flex justify-center">
-        <BaseLoader/>
-      </div>
     </template>
-    <p v-else class="text-center text-lg">Search for something to see results!</p>
+    <div v-if="loading || isOnLoadMore" class="flex justify-center">
+      <BaseLoader/>
+    </div>
   </div>
 </template>
 
@@ -24,47 +29,52 @@
   import { onMounted, ref } from "vue";
   import { BaseResponse } from "@/interfaces";
   import BaseLoader from "@/components/base/BaseLoader.vue";
+  import BaseCard from "@/components/base/BaseCard.vue";
   import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
   import { useDecodingUtilities } from "@/composables/useDecodingUtilities";
+  import { useInfiniteScroll } from "@/composables/useInfiniteScroll";
+  import { useMapPosterPath } from "@/composables/useMapPosterPath";
+  import { useMapReleaseDate } from "@/composables/useMapReleaseDate";
+  import { MediaType } from "./enums/media-type.enum";
+
+  const searchTerm = ref<string>("");
+  const route = useRoute();
+  const router = useRouter();
 
   const { encodeQueryParams } = useEncodingUtilities();
   const { decodeQueryParams } = useDecodingUtilities();
-
-  const route = useRoute();
-  const router = useRouter();
-  const searchTerm = ref<string>("");
-  const loading = ref<boolean>(false);
-  const items = ref<any[]>([]);
-  const currentPage = ref<number>(1);
-  const totalPages = ref<number>(1);
+  const { mapPosterPath } = useMapPosterPath();
+  const { mapReleaseDate } = useMapReleaseDate();
+  const { items, currentPage, loading, isOnLoadMore, getItems } = useInfiniteScroll<BaseResponse<any>, any>('https://api.themoviedb.org/3/search/multi?api_key=803a77b2748b6f5d6363b4fa92bfd870', itemsMapper);
 
   function initializeSearchTerm(): void {
     searchTerm.value = route.query.term ? decodeQueryParams(route.query.term as string) : "";
   }
-
+  
   function updateQueryParams(): void {
     router.replace({ name: 'Search', query: { term: encodeQueryParams(searchTerm.value) } });
   }
 
-  function getSearchedItems(page: number): void {
-    loading.value = true;
-
-    fetch(`https://api.themoviedb.org/3/search/multi?api_key=803a77b2748b6f5d6363b4fa92bfd870&query=${searchTerm.value}
-    &language=en-US&page=${page}`)
-      .then(response => response.json())
-      .then((response: BaseResponse<any>) => {
-        console.log(response);
-        items.value = response.results;
-        currentPage.value = response.page;
-        totalPages.value = response.total_pages;
-      })
-      .catch((err) => console.error(err))
-      .finally(() => loading.value = false)
+  function itemsMapper(items: any[]): any[] {
+    return items.map((item: any) => {
+      if(item.poster_path) {
+        return { ...item, poster_path: mapPosterPath(185, item.poster_path) };
+      } else if(item.profile_path) {
+        return { ...item, profile_path: mapPosterPath(185, item.profile_path) };
+      }
+    });
   }
 
+  function search(): void {
+    currentPage.value = 1;
+    items.value = [];
+    loading.value = true;
+    getItems({ query: searchTerm.value });
+  }
+  
   onMounted(() => {
     initializeSearchTerm();
-    getSearchedItems(1);
+    if(searchTerm.value) search();
   });
 </script>
 
