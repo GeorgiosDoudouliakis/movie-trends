@@ -54,6 +54,12 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
         }
     }
 
+    function initializeState(): void {
+        currentPage.value = 1;
+        items.value = [];
+        loading.value = true;
+    }
+
     onMounted(() => window.addEventListener('scroll', () => fetchOnScroll()));
 
     onUnmounted(() => window.removeEventListener('scroll', fetchOnScroll))
@@ -61,9 +67,9 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
     return {
         items,
         msg: readonly(msg),
-        currentPage,
-        loading,
+        loading: readonly(loading),
         isOnLoadMore: readonly(isOnLoadMore),
-        getItems
+        getItems,
+        initializeState
     };
 }

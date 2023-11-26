@@ -44,7 +44,7 @@
   const { encodeQueryParams } = useEncodingUtilities();
   const { decodeQueryParams } = useDecodingUtilities();
   const { mapReleaseDate } = useMapReleaseDate();
-  const { items, msg, currentPage, loading, isOnLoadMore, getItems } = useInfiniteScroll<BaseResponse<any>, any>('https://api.themoviedb.org/3/search/multi?api_key=803a77b2748b6f5d6363b4fa92bfd870');
+  const { items, msg, loading, isOnLoadMore, getItems, initializeState } = useInfiniteScroll<BaseResponse<any>, any>('https://api.themoviedb.org/3/search/multi?api_key=803a77b2748b6f5d6363b4fa92bfd870');
 
   function initializeSearchTerm(): void {
     searchTerm.value = route.query.term ? decodeQueryParams(route.query.term as string) : "";
@@ -55,9 +55,7 @@
   }
 
   function search(): void {
-    currentPage.value = 1;
-    items.value = [];
-    loading.value = true;
+    initializeState();
     getItems({ query: searchTerm.value });
   }
   
