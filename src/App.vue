@@ -4,11 +4,14 @@
     <router-view />
   </main>
   <TheFooter/>
+
+  <TheGoTopButton/>
 </template>
 
 <script setup lang="ts">
-  import TheHeader from "@/components/TheHeader.vue";
-  import TheFooter from "@/components/TheFooter.vue";
+  import TheHeader from "./components/TheHeader.vue";
+  import TheFooter from "./components/TheFooter.vue";
+  import TheGoTopButton from "./components/TheGoTopButton.vue";
 </script>
 
 <style lang="scss">
