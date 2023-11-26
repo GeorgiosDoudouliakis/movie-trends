@@ -55,14 +55,20 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
     }
 
     function initializeState(): void {
-        currentPage.value = 1;
+        fetchUrl.value = '';
         items.value = [];
+        currentPage.value = 1;
+        totalPages.value = 1;
         loading.value = true;
+        isOnLoadMore.value = false;
     }
 
     onMounted(() => window.addEventListener('scroll', () => fetchOnScroll()));
 
-    onUnmounted(() => window.removeEventListener('scroll', fetchOnScroll))
+    onUnmounted(() => {
+        window.removeEventListener('scroll', fetchOnScroll);
+        initializeState();
+    })
 
     return {
         items,
