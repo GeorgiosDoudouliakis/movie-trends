@@ -2,7 +2,7 @@
   <div class="py-12 wrapper">
     <div class="flex justify-between items-center mb-10">
       <h2 class="text-lg text-secondary">Top Rated {{ itemsType }}</h2>
-      <button class="btn-secondary"><router-link :to="btnPath">Show All</router-link></button>
+      <button class="btn-secondary"><router-link :to="{ name: btnPathName }">Show All</router-link></button>
     </div>
 
     <template v-if="!loading">
@@ -26,7 +26,7 @@
     itemsType: "Movies" | "Tv Series",
     items: TopRatedItemModel[],
     loading: boolean,
-    btnPath: "movies" | "tv-series"
+    btnPathName: "Top rated movies" | "Top rated tv series"
   }>();
 </script>
 
