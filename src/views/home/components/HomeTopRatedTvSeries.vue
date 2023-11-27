@@ -3,17 +3,12 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted } from "vue";
   import BaseTopRated from "./base/BaseTopRated.vue";
   import { useTopRated } from "../composables/useTopRated";
   import { TopRatedItemModel,TopRatedTvSeriesResponse } from "../interfaces";
   import { TvSerie } from "@/interfaces";
-  import { useMapReleaseDate } from "@/composables/useMapReleaseDate";
-  import { useMapPosterPath } from "@/composables/useMapPosterPath";
 
-  const { items, loading, getTopRatedItems } = useTopRated<TopRatedTvSeriesResponse, TvSerie>();
-  const { mapReleaseDate } = useMapReleaseDate();
-  const { mapPosterPath } = useMapPosterPath();
+  const { items, loading, mapReleaseDate, mapPosterPath } = useTopRated<TopRatedTvSeriesResponse, TvSerie>("https://api.themoviedb.org/3/tv/top_rated?api_key=803a77b2748b6f5d6363b4fa92bfd870&page=1", itemMapper);
 
   function itemMapper(item: TvSerie): TopRatedItemModel {
     return {
@@ -25,6 +20,4 @@
       releaseDate: mapReleaseDate(item.first_air_date)
     }
   }
-
-  onMounted(() => getTopRatedItems("tv", itemMapper));
 </script>
