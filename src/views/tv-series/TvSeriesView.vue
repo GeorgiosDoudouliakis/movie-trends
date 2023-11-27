@@ -21,7 +21,7 @@
     },
     {
       id: "Top rated",
-      name: "Upcoming movies"
+      name: "Top rated tv series"
     }
   ];
 </script>
