@@ -15,10 +15,11 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/movies',
     name: 'Movies',
+    redirect: { name: 'Now playing movies' },
     component: () => import("../views/movies/MoviesView.vue"),
     children: [
       {
-        path: "/now-playing",
+        path: "now-playing",
         name: 'Now playing movies',
         component: () => import("../views/movies/NowPlayingMoviesView.vue"),
         meta: {
@@ -26,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "/popular",
+        path: "popular",
         name: 'Popular movies',
         component: () => import("../views/movies/PopularMoviesView.vue"),
         meta: {
@@ -34,7 +35,7 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "/top-rated",
+        path: "top-rated",
         name: 'Top rated movies',
         component: () => import("../views/movies/TopRatedMoviesView.vue"),
         meta: {
@@ -42,26 +43,23 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "/upcoming",
+        path: "upcoming",
         name: 'Upcoming movies',
         component: () => import("../views/movies/UpcomingMoviesView.vue"),
         meta: {
           title: 'Upcoming movies'
         },
-      },
-      {
-        path: "",
-        redirect: { name: "Now playing movies" }
       }
     ]
   },
   {
     path: '/tv-series',
     name: 'TvSeries',
+    redirect: { name: 'Airing today tv series' },
     component: () => import("../views/tv-series/TvSeriesView.vue"),
     children: [
       {
-        path: "/airing-today",
+        path: "airing-today",
         name: 'Airing today tv series',
         component: () => import("../views/tv-series/AiringTodayTvSeriesView.vue"),
         meta: {
@@ -69,7 +67,7 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "/on-the-air",
+        path: "on-the-air",
         name: 'On the air tv series',
         component: () => import("../views/tv-series/OnTheAirTvSeriesView.vue"),
         meta: {
@@ -77,7 +75,7 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "/popular",
+        path: "popular",
         name: 'Popular tv series',
         component: () => import("../views/tv-series/PopularTvSeriesView.vue"),
         meta: {
@@ -85,16 +83,12 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: "/top-rated",
+        path: "top-rated",
         name: 'Top rated tv series',
         component: () => import("../views/tv-series/TopRatedTvSeriesView.vue"),
         meta: {
           title: 'Top rated tv series'
         },
-      },
-      {
-        path: "",
-        redirect: { name: "Airing today tv series" }
       }
     ]
   },
