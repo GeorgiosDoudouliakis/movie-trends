@@ -71,7 +71,7 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
     })
 
     return {
-        items,
+        items: readonly(items),
         msg: readonly(msg),
         loading: readonly(loading),
         isOnLoadMore: readonly(isOnLoadMore),
