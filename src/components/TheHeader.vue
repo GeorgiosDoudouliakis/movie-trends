@@ -136,7 +136,7 @@
     }
   }
 
-  .router-link-exact-active:not(h1 > a, a:has(> svg)) {
+  .router-link-active:not(h1 > a, a:has(> svg)) {
     @apply bg-primary;
     @apply text-lighter-black;
   }
