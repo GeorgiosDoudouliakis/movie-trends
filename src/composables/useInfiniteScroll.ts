@@ -25,6 +25,7 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
 
     function getItems(params?: { [key: string]: any }) {
         loading.value = !isOnLoadMore.value;
+        msg.value = "";
 
         if(params) extraParams.value = { ...params };
 
