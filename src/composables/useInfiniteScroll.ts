@@ -1,7 +1,7 @@
 import { onMounted, onUnmounted, readonly, Ref, ref } from "vue";
 import { BaseResponse } from "@/interfaces";
 
-export function useInfiniteScroll<ResponseType, ItemType extends { id: number; name: string; }>(url: string) {
+export function useInfiniteScroll<ResponseType, ItemType>(url: string) {
     const fetchUrl = ref<string>("");
     const items = ref<ItemType[]>([]) as Ref<ItemType[]>;
     const msg = ref<string>("");
@@ -72,7 +72,7 @@ export function useInfiniteScroll<ResponseType, ItemType extends { id: number; n
     })
 
     return {
-        items: readonly(items),
+        items,
         msg: readonly(msg),
         loading: readonly(loading),
         isOnLoadMore: readonly(isOnLoadMore),
