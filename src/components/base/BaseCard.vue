@@ -20,7 +20,7 @@
   const { mapPosterPath } = useMapPosterPath();
 
   defineProps<{
-    image: { src: string; alt: string, width?: number },
+    image: { src: string; alt: string, width: number },
     name: string,
     direction: "vertical" | "horizontal"
   }>();
