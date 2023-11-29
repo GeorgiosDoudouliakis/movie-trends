@@ -1,7 +1,7 @@
 import { readonly } from "vue";
 
 export function useMapReleaseDate() {
-    const months: { [key: string]: string } = readonly({
+    const _months: { [key: string]: string } = readonly({
         "01": "Jan",
         "02": "Feb",
         "03": "Mar",
@@ -18,7 +18,7 @@ export function useMapReleaseDate() {
 
     function mapReleaseDate(date: string): string {
         const dateArr: string[] = date.split("-");
-        return dateArr[2] + " " + months[`${dateArr[1]}`] + " " + dateArr[0];
+        return dateArr[2] + " " + _months[`${dateArr[1]}`] + " " + dateArr[0];
     }
 
     return { mapReleaseDate };
