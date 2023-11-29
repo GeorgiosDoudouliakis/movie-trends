@@ -7,7 +7,7 @@
     <template v-if="!loading">
       <template v-for="item in items" :key="item?.id">
         <BaseCard v-if="item?.media_type == MediaType.MOVIE" :name="item?.title" :image="{ src: item?.poster_path, alt: item?.title, width: 100 }" direction="horizontal">
-          <span v-if="item?.release_date" class="italic mb-2">{{ mapReleaseDate(item?.release_date) }}</span>
+          <span v-if="item?.release_date" class="italic mb-2">{{ mapDate(item?.release_date) }}</span>
           <p v-if="item?.overview" class="text-fade">{{ item?.overview }}</p>
         </BaseCard>
         <BaseCard v-if="item?.media_type == MediaType.TV" :name="item?.name" :image="{ src: item?.poster_path, alt: item?.name, width: 100 }" direction="horizontal">
@@ -34,7 +34,7 @@
   import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
   import { useDecodingUtilities } from "@/composables/useDecodingUtilities";
   import { useInfiniteScroll } from "@/composables/useInfiniteScroll";
-  import { useMapReleaseDate } from "@/composables/useMapReleaseDate";
+  import { useMapDate } from "@/composables/useMapDate";
   import { MediaType } from "./enums/media-type.enum";
 
   const searchTerm = ref<string>("");
@@ -43,7 +43,7 @@
 
   const { encodeQueryParams } = useEncodingUtilities();
   const { decodeQueryParams } = useDecodingUtilities();
-  const { mapReleaseDate } = useMapReleaseDate();
+  const { mapDate } = useMapDate();
   const { items, msg, loading, isOnLoadMore, getItems, initializeState } = useInfiniteScroll<BaseResponse<any>, any>('https://api.themoviedb.org/3/search/multi?api_key=803a77b2748b6f5d6363b4fa92bfd870');
 
   function initializeSearchTerm(): void {

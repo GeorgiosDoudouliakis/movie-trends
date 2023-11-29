@@ -3,7 +3,7 @@
     <div class="flex flex-wrap justify-center gap-6">
       <template v-for="item in items" :key="item.id">
         <BaseCard :name="item.title" :image="{ src: item.poster_path, alt: item.title, width: 185 }" direction="vertical">
-          <span class="text-center">{{ mapReleaseDate(item.release_date) }}</span>
+          <span class="text-center">{{ mapDate(item.release_date) }}</span>
         </BaseCard>
       </template>
     </div>
@@ -18,7 +18,7 @@
   import { Movie } from "@/interfaces";
   import BaseLoader from "@/components/base/BaseLoader.vue";
   import BaseCard from "@/components/base/BaseCard.vue";
-  import { useMapReleaseDate } from "@/composables/useMapReleaseDate";
+  import { useMapDate } from "@/composables/useMapDate";
 
   defineProps<{
     items: Movie[],
@@ -26,5 +26,5 @@
     isOnLoadMore: boolean
   }>()
 
-  const { mapReleaseDate } = useMapReleaseDate();
+  const { mapDate } = useMapDate();
 </script>

@@ -8,7 +8,7 @@
   import { TopRatedItemModel, TopRatedMoviesResponse } from "../interfaces";
   import { Movie } from "@/interfaces";
 
-  const { items, loading, mapReleaseDate, mapPosterPath } = useTopRated<TopRatedMoviesResponse, Movie>("https://api.themoviedb.org/3/movie/top_rated?api_key=803a77b2748b6f5d6363b4fa92bfd870&page=1", itemMapper);
+  const { items, loading, mapDate, mapPosterPath } = useTopRated<TopRatedMoviesResponse, Movie>("https://api.themoviedb.org/3/movie/top_rated?api_key=803a77b2748b6f5d6363b4fa92bfd870&page=1", itemMapper);
 
   function itemMapper(item: Movie): TopRatedItemModel {
     return {
@@ -17,7 +17,7 @@
       description: item.overview,
       rate: +Number.parseFloat(item.vote_average.toString()).toFixed(1),
       image: mapPosterPath(185, item.poster_path),
-      releaseDate: mapReleaseDate(item.release_date)
+      releaseDate: mapDate(item.release_date)
     }
   }
 </script>
