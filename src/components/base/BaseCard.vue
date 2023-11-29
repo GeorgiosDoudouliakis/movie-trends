@@ -5,7 +5,7 @@
       <div class="img-container shrink-0" :class="{ 'height-when-vertical': direction === 'vertical' }" 
       :style="{ width: image.width + 'px' }">
         <img v-if="image.src" class="responsive-img" :src="mapImagePath(185, image.src)" :alt="image.alt">
-        <img v-else class="responsive-img" src="../../assets/no_image_available.jpg">
+        <img v-else class="responsive-img" src="../../assets/no_image_available.jpg" alt="">
       </div>
       <div class="flex flex-col p-4 grow-0 card-content" :class="{ 'ml-2': direction === 'horizontal' }">
         <h3 class="text-lg" :class="{ 'text-center': direction === 'vertical' }">{{ name }}</h3>

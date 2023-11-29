@@ -3,7 +3,7 @@
     <div class="flex flex-col general-info">
       <div class="mb-8 img-container">
         <img v-if="personModel.profile_path" class="responsive-img" :src="personModel.profile_path" :alt="personModel.name" width="250"/>
-        <img v-else class="responsive-img" src="../../assets/no_image_available.jpg" width="250"/>
+        <img v-else class="responsive-img" src="../../assets/no_image_available.jpg" width="185" alt=""/>
       </div>
       <h3 class="text-xl mb-8">Personal Information</h3>
       <template v-if="personModel.known_for_department">
