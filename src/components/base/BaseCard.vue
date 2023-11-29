@@ -4,7 +4,7 @@
     :style="{ width: direction === 'vertical' ? image.width + 'px' : '100%' }">
       <div class="img-container shrink-0" :class="{ 'height-when-vertical': direction === 'vertical' }" 
       :style="{ width: image.width + 'px' }">
-        <img v-if="image.src" class="responsive-img" :src="mapPosterPath(185, image.src)" :alt="image.alt">
+        <img v-if="image.src" class="responsive-img" :src="mapImagePath(185, image.src)" :alt="image.alt">
         <img v-else class="responsive-img" src="../../assets/no_image_available.jpg">
       </div>
       <div class="flex flex-col p-4 grow-0 card-content" :class="{ 'ml-2': direction === 'horizontal' }">
@@ -15,9 +15,9 @@
 </template>
 
 <script setup lang="ts">
-  import { useMapPosterPath } from '@/composables/useMapPosterPath';
+  import { useMapImagePath } from '@/composables/useMapImagePath';
 
-  const { mapPosterPath } = useMapPosterPath();
+  const { mapImagePath } = useMapImagePath();
 
   defineProps<{
     image: { src: string; alt: string, width: number },

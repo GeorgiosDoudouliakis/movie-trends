@@ -61,14 +61,14 @@
   import BaseLoader from "@/components/base/BaseLoader.vue";
   import { PersonModel } from "@/views/people/types/person-model.type";
   import BaseCard from "@/components/base/BaseCard.vue";
-  import { useMapPosterPath } from "@/composables/useMapPosterPath";
+  import { useMapImagePath } from "@/composables/useMapImagePath";
 
   const personModel = ref<PersonModel>({} as PersonModel);
   const loading = ref<boolean>(true);
 
   const { idName } = defineProps<{ idName: string }>();
 
-  const { mapPosterPath } = useMapPosterPath();
+  const { mapImagePath } = useMapImagePath();
 
   function getData() {
     const paramsArr = idName.split("-");
@@ -81,7 +81,7 @@
         personModel.value = {
           name: person.results[0].name,
           known_for: person.results[0].known_for,
-          profile_path: person.results[0].profile_path && mapPosterPath(185, person.results[0].profile_path),
+          profile_path: person.results[0].profile_path && mapImagePath(185, person.results[0].profile_path),
           biography: personDetails.biography,
           birthday: personDetails.birthday,
           deathday: personDetails.deathday,

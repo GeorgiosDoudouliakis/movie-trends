@@ -8,7 +8,7 @@
   import { TopRatedItemModel,TopRatedTvSeriesResponse } from "../interfaces";
   import { TvSerie } from "@/interfaces";
 
-  const { items, loading, mapDate, mapPosterPath } = useTopRated<TopRatedTvSeriesResponse, TvSerie>("https://api.themoviedb.org/3/tv/top_rated?api_key=803a77b2748b6f5d6363b4fa92bfd870&page=1", itemMapper);
+  const { items, loading, mapDate, mapImagePath } = useTopRated<TopRatedTvSeriesResponse, TvSerie>("https://api.themoviedb.org/3/tv/top_rated?api_key=803a77b2748b6f5d6363b4fa92bfd870&page=1", itemMapper);
 
   function itemMapper(item: TvSerie): TopRatedItemModel {
     return {
@@ -16,7 +16,7 @@
       title: item.name,
       description: item.overview,
       rate: +Number.parseFloat(item.vote_average.toString()).toFixed(1),
-      image: mapPosterPath(185, item.poster_path),
+      image: mapImagePath(185, item.poster_path),
       releaseDate: mapDate(item.first_air_date)
     }
   }
