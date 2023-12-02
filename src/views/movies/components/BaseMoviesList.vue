@@ -5,7 +5,7 @@
         <BaseCard :name="item.title" :image="{ src: item.poster_path, alt: item.title, width: 185 }" direction="vertical">
           <span class="italic text-center mb-2">{{ mapDate(item.release_date) }}</span>
           <span class="font-bold text-center">{{ item.vote_count }} {{ item.vote_count === 1 ? 'vote' : 'votes' }}</span>
-          <span class="text-center vote">{{ Number.parseFloat(item.vote_average.toString()).toFixed(1) }}</span>
+          <span class="text-center vote">{{ mapVoteAverage(item.vote_average) }}</span>
         </BaseCard>
       </template>
     </div>
@@ -21,6 +21,7 @@
   import BaseLoader from "@/components/base/BaseLoader.vue";
   import BaseCard from "@/components/base/BaseCard.vue";
   import { useMapDate } from "@/composables/useMapDate";
+  import { useMapVoteAverage } from "@/composables/useMapVoteAverage";
 
   defineProps<{
     items: Movie[],
@@ -29,4 +30,5 @@
   }>()
 
   const { mapDate } = useMapDate();
+  const { mapVoteAverage } = useMapVoteAverage();
 </script>
