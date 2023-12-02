@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loading" class="flex py-12 wrapper">
     <div class="flex flex-col general-info">
-      <div class="mb-8 img-container">
+      <div class="mb-8 img-container person-movie-tvserie-img-container">
         <img v-if="personModel.profile_path" class="responsive-img" :src="personModel.profile_path" :alt="personModel.name" width="250"/>
         <img v-else class="responsive-img" src="../../assets/no_image_available.jpg" width="185" alt=""/>
       </div>
@@ -29,7 +29,7 @@
         </ul>
       </template>
     </div>
-    <div class="info">
+    <div class="person-movie-tvserie-info">
       <div class="flex justify-between items-center mb-10">
         <h2 class="text-2xl">{{ personModel.name }}</h2>
         <router-link class="btn-primary p-2" :to="{ name: 'People' }">Popular People</router-link>
@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  <div v-else class="flex justify-center items-center loader-container">
+  <div v-else class="flex justify-center items-center loader-container-full-page">
     <BaseLoader />
   </div>
 </template>
@@ -113,37 +113,9 @@
       order: 0;
       width: 300px;
     }
-
-    > .img-container {
-      display: none;
-
-      @media(min-width: 1024px) {
-        display: initial;
-        width: 250px;
-        height: 375.67px;
-      }
-    }
-  }
-
-  .info {
-    margin-bottom: 40px;
-
-    @media(min-width: 1024px) {
-      width: 100%;
-      margin-left: 40px;
-      margin-bottom: 0;
-    }
   }
 
   .known-for-item:not(:last-of-type) {
     margin-bottom: 20px;
-  }
-
-  .loader-container {
-    min-height: calc(100vh - 117px);
-
-    @media(min-width: 768px) {
-      min-height: calc(100vh - 109px);
-    }
   }
 </style>

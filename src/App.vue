@@ -135,6 +135,34 @@
     background: var(--primary-color);
   }
 
+  .person-movie-tvserie-img-container {
+    display: none;
+
+    @media(min-width: 1024px) {
+      display: initial;
+      width: 300px;
+      height: 350px;
+    }
+  }
+
+  .person-movie-tvserie-info {
+    margin-bottom: 40px;
+
+    @media(min-width: 1024px) {
+      width: 100%;
+      margin-left: 40px;
+      margin-bottom: 0;
+    }
+  }
+
+  .loader-container-full-page {
+    min-height: calc(100vh - 117px);
+
+    @media(min-width: 768px) {
+      min-height: calc(100vh - 109px);
+    }
+  }
+
   // Carousel style overwrites
   .carousel__prev,
   .carousel__next {
