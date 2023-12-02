@@ -43,7 +43,8 @@
         <div>
           <BaseCard class="known-for-item" v-for="known in personModel.known_for" :key="known.id" 
           :image="{ src: known.poster_path || known.profile_path,
-          alt: known.title || known.name, width: 100 }" :name="known.title || known.name" direction="horizontal">
+          alt: known.title || known.name, width: 100 }" :name="known.title || known.name" direction="horizontal"
+          @click="goToItem(known)">
             <p class="text-fade">{{ known['overview'] }}</p>
           </BaseCard>
         </div>
@@ -62,6 +63,8 @@
   import { PersonModel } from "@/views/people/types/person-model.type";
   import BaseCard from "@/components/base/BaseCard.vue";
   import { useMapImagePath } from "@/composables/useMapImagePath";
+  import router from "@/router";
+import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
 
   const personModel = ref<PersonModel>({} as PersonModel);
   const loading = ref<boolean>(true);
@@ -69,6 +72,7 @@
   const { idName } = defineProps<{ idName: string }>();
 
   const { mapImagePath } = useMapImagePath();
+  const { encodeIdNameParam } = useEncodingUtilities();
 
   function getData() {
     const paramsArr = idName.split("-");
@@ -92,6 +96,13 @@
       })
       .catch((err) => console.error(err))
       .finally(() => loading.value = false)
+  }
+
+  function goToItem(knownForItem: any): void {
+    if(knownForItem.media_type === "movie") 
+      router.push({ name: 'Movie', params: { idName: encodeIdNameParam(knownForItem.id, knownForItem.title) } });
+    else if(knownForItem.media_type === "tv")
+      router.push({ name: 'TvSerie', params: { idName: encodeIdNameParam(knownForItem.id, knownForItem.name) } });
   }
 
   onMounted(() => getData());

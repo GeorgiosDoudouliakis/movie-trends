@@ -7,7 +7,7 @@
 
     <template v-if="!loading">
       <div class="flex gap-x-6 justify-between overflow-x-auto w-full top-rated-items-container">
-        <BaseTopRatedItem v-for="item in items" :key="item.id" :item="item" />
+        <BaseTopRatedItem v-for="item in items" :key="item.id" :item="item" @click="goToItem(item)" />
       </div>
     </template>
 
@@ -21,13 +21,22 @@
   import { TopRatedItemModel } from "../../interfaces";
   import BaseLoader from "@/components/base/BaseLoader.vue";
   import BaseTopRatedItem from "./BaseTopRatedItem.vue";
+  import router from "@/router";
+  import { useEncodingUtilities } from "@/composables/useEncodingUtilities";
 
-  defineProps<{
+  const { encodeIdNameParam } = useEncodingUtilities();
+
+  const { itemsType } = defineProps<{
     itemsType: "Movies" | "Tv Series",
     items: TopRatedItemModel[],
     loading: boolean,
     btnPathName: "Top rated movies" | "Top rated tv series"
   }>();
+
+  function goToItem(item: TopRatedItemModel): void {
+    if(itemsType === 'Movies') router.push({ name: 'Movie', params: { idName: encodeIdNameParam(item.id, item.title) } });
+    else router.push({ name: 'TvSerie', params: { idName: encodeIdNameParam(item.id, item.title) } });
+  }
 </script>
 
 <style scoped lang="scss">

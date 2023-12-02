@@ -6,14 +6,14 @@
   <div class="py-12 wrapper">
     <template v-if="!loading">
       <template v-for="item in items" :key="item?.id">
-        <BaseCard v-if="item?.media_type == MediaType.MOVIE" :name="item?.title" :image="{ src: item?.poster_path, alt: item?.title, width: 100 }" direction="horizontal">
+        <BaseCard v-if="item?.media_type == MediaType.MOVIE" :name="item?.title" :image="{ src: item?.poster_path, alt: item?.title, width: 100 }" direction="horizontal" @click="goToMovie(item)">
           <span v-if="item?.release_date" class="italic mb-2">{{ mapDate(item?.release_date) }}</span>
           <p v-if="item?.overview" class="text-fade">{{ item?.overview }}</p>
         </BaseCard>
-        <BaseCard v-if="item?.media_type == MediaType.TV" :name="item?.name" :image="{ src: item?.poster_path, alt: item?.name, width: 100 }" direction="horizontal">
+        <BaseCard v-if="item?.media_type == MediaType.TV" :name="item?.name" :image="{ src: item?.poster_path, alt: item?.name, width: 100 }" direction="horizontal" @click="goToTvSerie(item)">
           <p v-if="item?.overview" class="text-fade">{{ item?.overview }}</p>
         </BaseCard>
-        <BaseCard v-if="item?.media_type == MediaType.PERSON" :name="item?.name" :image="{ src: item?.profile_path, alt: item?.name, width: 100 }" direction="horizontal">
+        <BaseCard v-if="item?.media_type == MediaType.PERSON" :name="item?.name" :image="{ src: item?.profile_path, alt: item?.name, width: 100 }" direction="horizontal" @click="goToPerson(item)">
           <span class="italic">{{ item?.known_for_department }}</span>
         </BaseCard>
       </template>
@@ -41,7 +41,7 @@
   const route = useRoute();
   const router = useRouter();
 
-  const { encodeQueryParams } = useEncodingUtilities();
+  const { encodeQueryParams, encodeIdNameParam } = useEncodingUtilities();
   const { decodeQueryParams } = useDecodingUtilities();
   const { mapDate } = useMapDate();
   const { items, msg, loading, isOnLoadMore, getItems, initializeState } = useInfiniteScroll<BaseResponse<any>, any>('https://api.themoviedb.org/3/search/multi?api_key=803a77b2748b6f5d6363b4fa92bfd870');
@@ -59,6 +59,18 @@
     getItems({ query: searchTerm.value });
   }
   
+  function goToMovie(movie: any): void {
+    router.push({ name: 'Movie', params: { idName: encodeIdNameParam(movie.id, movie.title) } })
+  }
+
+  function goToTvSerie(tvSerie: any): void {
+    router.push({ name: 'TvSerie', params: { idName: encodeIdNameParam(tvSerie.id, tvSerie.name) } })
+  }
+
+  function goToPerson(person: any): void {
+    router.push({ name: 'Person', params: { idName: encodeIdNameParam(person.id, person.name) } })
+  }
+
   onMounted(() => {
     initializeSearchTerm();
     if(searchTerm.value) search();
