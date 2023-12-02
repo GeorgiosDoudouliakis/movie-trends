@@ -7,7 +7,7 @@
     <div class="person-movie-tvserie-info">
       <div class="flex justify-between items-center mb-10">
         <h2 class="text-2xl">{{ movie.title }}</h2>
-        <router-link class="btn-secondary p-2" :to="{ name: 'Movies' }">Back</router-link>
+        <router-link class="btn-secondary p-2" :to="{ name: 'Movies' }">All Movies</router-link>
       </div>
       <div class="mb-6">
         <p class="mb-4">Release Date: {{ mapDate(movie.release_date) }}</p>

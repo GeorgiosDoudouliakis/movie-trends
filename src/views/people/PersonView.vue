@@ -32,7 +32,7 @@
     <div class="person-movie-tvserie-info">
       <div class="flex justify-between items-center mb-10">
         <h2 class="text-2xl">{{ personModel.name }}</h2>
-        <router-link class="btn-primary p-2" :to="{ name: 'People' }">Popular People</router-link>
+        <router-link class="btn-secondary p-2" :to="{ name: 'People' }">All People</router-link>
       </div>
       <template v-if="personModel.biography">
         <span class="inline-flex text-xl mb-6">Biography</span>
