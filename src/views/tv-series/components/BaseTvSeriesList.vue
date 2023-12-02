@@ -4,8 +4,9 @@
       <template v-for="item in items" :key="item.id">
         <BaseCard :name="item.name" :image="{ src: item.poster_path, alt: item.name, width: 185 }" direction="vertical">
           <span class="italic text-center mb-2">{{ mapDate(item.first_air_date) }}</span>
-          <span class="font-bold text-center">{{ item.vote_count }} {{ item.vote_count === 1 ? 'vote' : 'votes' }}</span>
-          <span class="text-center vote">{{ mapVoteAverage(item.vote_average) }}</span>
+          <span v-if="item.vote_count" class="font-bold text-center">votes: {{ item.vote_count }}</span>
+          <span v-if="!item.vote_count" class="font-bold text-center">No votes yet</span>
+          <span v-if="item.vote_average" class="text-center vote">{{ mapVoteAverage(item.vote_average) }}</span>
         </BaseCard>
       </template>
     </div>
