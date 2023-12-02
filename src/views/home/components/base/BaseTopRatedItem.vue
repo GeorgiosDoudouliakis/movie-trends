@@ -1,6 +1,6 @@
 <template>
   <div class="relative shrink-0 cursor-pointer item-container">
-    <span class="absolute p-2">{{ item.rate }}</span>
+    <span class="vote">{{ item.rate }}</span>
     <div class="img-container">
       <img class="responsive-img" :src="item.image" :alt="item.title + 'poster'" width="185" height="278">
     </div>
@@ -24,13 +24,6 @@
 
     > .img-container {
       height: 278px;
-    }
-
-    > span {
-      top: 0;
-      right: 0;
-      color: var(--lighter-black-color);
-      background: var(--primary-color);
     }
   }
 </style>

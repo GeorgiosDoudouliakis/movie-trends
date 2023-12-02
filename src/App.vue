@@ -126,6 +126,15 @@
     }
   }
 
+  .vote {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    color: var(--lighter-black-color);
+    background: var(--primary-color);
+  }
+
   // Carousel style overwrites
   .carousel__prev,
   .carousel__next {

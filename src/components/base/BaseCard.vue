@@ -1,14 +1,14 @@
 <template>
-  <div class="flex mb-6 cursor-pointer card-container"
+  <div class="flex mb-6 cursor-pointer relative card-container"
     :class="{ 'flex-col': direction === 'vertical', 'flex-row': direction === 'horizontal' }"
     :style="{ width: direction === 'vertical' ? image.width + 'px' : '100%' }">
-      <div class="img-container shrink-0" :class="{ 'height-when-vertical': direction === 'vertical' }" 
+      <div class="img-container shrink-0" :class="{ 'height-when-vertical': direction === 'vertical' }"
       :style="{ width: image.width + 'px' }">
         <img v-if="image.src" class="responsive-img" :src="mapImagePath(185, image.src)" :alt="image.alt">
         <img v-else class="responsive-img" src="../../assets/no_image_available.jpg" alt="">
       </div>
       <div class="flex flex-col p-4 grow-0 card-content" :class="{ 'ml-2': direction === 'horizontal' }">
-        <h3 class="text-lg" :class="{ 'text-center': direction === 'vertical' }">{{ name }}</h3>
+        <h3 class="mb-2" :class="{ 'text-center': direction === 'vertical' }">{{ name }}</h3>
         <slot></slot>
       </div>
   </div>
@@ -38,9 +38,5 @@
     > .img-container.height-when-vertical {
       height: 278px;
     }
-  }
-
-  .card-content > *:not(:last-child) {
-    margin-bottom: 10px;
   }
 </style>
