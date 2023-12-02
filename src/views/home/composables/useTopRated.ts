@@ -1,9 +1,9 @@
-import { onMounted, readonly, ref } from "vue";
-import { TopRatedItemModel } from "../interfaces";
-import { BaseItem, BaseResponse } from "@/interfaces";
 import { useMapDate } from "@/composables/useMapDate";
 import { useMapImagePath } from "@/composables/useMapImagePath";
 import { useMapVoteAverage } from "@/composables/useMapVoteAverage";
+import { BaseItem, BaseResponse } from "@/interfaces";
+import { onMounted, readonly, ref } from "vue";
+import { TopRatedItemModel } from "../interfaces";
 
 export function useTopRated<ResponseType extends BaseResponse<ItemType>, ItemType extends BaseItem>(url: string, itemMapper: (item: ItemType) => TopRatedItemModel) {
     const loading = ref<boolean>(true);
@@ -23,5 +23,5 @@ export function useTopRated<ResponseType extends BaseResponse<ItemType>, ItemTyp
 
     onMounted(() => getTopRatedItems());
 
-    return { items: readonly(items), loading: readonly(loading), mapDate, mapImagePath, mapVoteAverage };
+    return { items, loading: readonly(loading), mapDate, mapImagePath, mapVoteAverage };
 }
