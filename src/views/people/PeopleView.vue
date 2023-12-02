@@ -1,6 +1,6 @@
 <template>
   <div class="py-12 wrapper">
-    <h2 class="text-2xl text-center mb-10">Popular People</h2>
+    <h2 class="text-2xl text-center py-4 mb-10 bg-card-bg">POPULAR PEOPLE</h2>
     <template v-if="!loading">
       <div class="flex flex-wrap justify-center gap-6">
         <BaseCard v-for="person in items" :key="person.id" :name="person.original_name"
