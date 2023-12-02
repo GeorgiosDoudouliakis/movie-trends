@@ -56,7 +56,7 @@ const routes: Array<RouteRecordRaw> = [
         ]
       },
       {
-        path: ":id",
+        path: ":idName",
         name: 'Movie',
         props: true,
         component: () => import("../views/movies/MovieVue.vue")
@@ -107,7 +107,7 @@ const routes: Array<RouteRecordRaw> = [
         ]
       },
       {
-        path: ":id",
+        path: ":idName",
         name: 'TvSerie',
         props: true,
         component: () => import("../views/tv-series/TvSerieView.vue")
