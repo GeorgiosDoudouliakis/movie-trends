@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loading" class="flex py-12 wrapper">
     <div class="mb-8 img-container person-movie-tvserie-img-container">
-      <img v-if="movie.poster_path" class="responsive-img" :src="movie.poster_path" :alt="movie.title" width="250"/>
+      <img v-if="movie.poster_path" class="responsive-img" :src="mapImagePath(185, movie.poster_path)" :alt="movie.title" width="250"/>
       <img v-else class="responsive-img" src="../../assets/no_image_available.jpg" width="185" alt=""/>
     </div>
     <div class="person-movie-tvserie-info">
@@ -45,7 +45,7 @@
   function getMovie(): void {
     fetch(`https://api.themoviedb.org/3/movie/${idName.split("-")[0]}?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US`)
         .then(res => res.json())
-        .then((res: MovieDetails) => movie.value = { ...res, poster_path: mapImagePath(185, res.poster_path) })
+        .then((res: MovieDetails) => movie.value = { ...res })
         .catch((err) => console.error(err))
         .finally(() => loading.value = false)
   }
