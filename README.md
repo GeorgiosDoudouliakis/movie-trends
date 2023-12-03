@@ -1,19 +1,15 @@
-# movie-trends
+# MovieTrends
 
-## Project setup
-```
-npm install
-```
+This project was generated with Vue v3.2.13
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Description
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Website for movies, tv series, actors and details about them.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Libraries Used
+
+- Tailwind
+
+## Data Source
+
+[The Movie Database (TMDB)](https://www.themoviedb.org/)
