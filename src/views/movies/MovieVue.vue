@@ -12,10 +12,10 @@
       <div class="mb-6">
         <p class="mb-4">Release Date: {{ mapDate(movie.release_date) }}</p>
         <ul v-if="movie.genres.length" class="flex mb-4">
-          <li v-for="genre in movie.genres" :key="genre.id" class="px-3 py-1 mr-4 bg-card-bg">{{ genre.name }}</li>
+          <li v-for="genre in movie.genres" :key="genre.id" class="text-center px-3 py-1 mr-4 bg-card-bg">{{ genre.name }}</li>
         </ul>
         <ul v-if="movie.production_companies.length" class="flex mb-4">
-          <li v-for="company in movie.production_companies" :key="company.id" class="px-3 py-1 mr-4 bg-card-bg">{{ company.name }}</li>
+          <li v-for="company in movie.production_companies" :key="company.id" class="text-center px-3 py-1 mr-4 bg-card-bg">{{ company.name }}</li>
         </ul>
         <a v-if="movie.homepage" :href="movie.homepage" class="text-base text-primary underline" target="_blank" rel="noreferrer">View Homepage</a>
       </div>
