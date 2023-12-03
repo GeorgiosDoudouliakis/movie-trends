@@ -15,7 +15,7 @@
               <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4">Tv Series</router-link>
             </li>
             <li>
-              <router-link :to="{ name: 'People' }" class="text-secondary text-lg p-4">People</router-link>
+              <router-link :to="{ name: 'Actors' }" class="text-secondary text-lg p-4">Actors</router-link>
             </li>
           </ul>
         </template>
@@ -37,7 +37,7 @@
               <router-link :to="{ name: 'TvSeries' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">Tv Series</router-link>
             </li>
             <li>
-              <router-link :to="{ name: 'People' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">People</router-link>
+              <router-link :to="{ name: 'Actors' }" class="text-secondary text-lg p-4" @click="handleMobileMenuVisibility">Actors</router-link>
             </li>
           </ul>
         </div>

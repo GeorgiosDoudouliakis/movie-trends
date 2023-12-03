@@ -115,21 +115,21 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: "/people",
+    path: "/actors",
     children: [
       {
         path: "",
-        name: 'People',
-        component: () => import("../views/people/PeopleView.vue"),
+        name: 'Actors',
+        component: () => import("@/views/actors/ActorsView.vue"),
         meta: {
-          title: 'People'
+          title: 'Actors'
         },
       },
       {
         path: ":idName",
-        name: 'Person',
+        name: 'Actor',
         props: true,
-        component: () => import("../views/people/PersonView.vue")
+        component: () => import("@/views/actors/ActorView.vue")
       }
     ]
   },

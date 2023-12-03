@@ -13,7 +13,7 @@
         <BaseCard v-if="item?.media_type == MediaType.TV" :name="item?.name" :image="{ src: item?.poster_path, alt: item?.name, width: 100 }" direction="horizontal" @click="goToTvSerie(item)">
           <p v-if="item?.overview" class="text-fade">{{ item?.overview }}</p>
         </BaseCard>
-        <BaseCard v-if="item?.media_type == MediaType.PERSON" :name="item?.name" :image="{ src: item?.profile_path, alt: item?.name, width: 100 }" direction="horizontal" @click="goToPerson(item)">
+        <BaseCard v-if="item?.media_type == MediaType.PERSON" :name="item?.name" :image="{ src: item?.profile_path, alt: item?.name, width: 100 }" direction="horizontal" @click="goToActor(item)">
           <span class="italic">{{ item?.known_for_department }}</span>
         </BaseCard>
       </template>
@@ -67,8 +67,8 @@
     router.push({ name: 'TvSerie', params: { idName: encodeIdNameParam(tvSerie.id, tvSerie.name) } })
   }
 
-  function goToPerson(person: any): void {
-    router.push({ name: 'Person', params: { idName: encodeIdNameParam(person.id, person.name) } })
+  function goToActor(actor: any): void {
+    router.push({ name: 'Actor', params: { idName: encodeIdNameParam(actor.id, actor.name) } })
   }
 
   onMounted(() => {
