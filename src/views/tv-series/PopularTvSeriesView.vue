@@ -3,12 +3,12 @@
 </template>
 
 <script setup lang="ts">
-  import { onBeforeMount } from "vue";
-  import { useTvSeriesList } from "@/views/tv-series/composables/useTvSeriesList";
-  import { TvSeriesType } from "@/views/tv-series/enums/tv-series-type.enum";
-  import BaseTvSeriesList from "@/views/tv-series/components/BaseTvSeriesList.vue";
+  import { useInfiniteScroll } from "@/composables/useInfiniteScroll";
+  import { BaseResponse, TvSerie } from "@/interfaces";
+  import { onMounted } from "vue";
+  import BaseTvSeriesList from "./components/BaseTvSeriesList.vue";
 
-  const { items, loading, isOnLoadMore, type } = useTvSeriesList();
+  const { items, loading, isOnLoadMore, getItems } = useInfiniteScroll<BaseResponse<TvSerie>, TvSerie>('https://api.themoviedb.org/3/tv/popular?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US');
 
-  onBeforeMount(() => type(TvSeriesType.POPULAR));
+  onMounted(() => getItems())
 </script>
