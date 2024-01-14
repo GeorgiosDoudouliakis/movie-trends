@@ -3,12 +3,12 @@
 </template>
 
 <script setup lang="ts">
+  import { useInfiniteScroll } from "@/composables/useInfiniteScroll";
+  import { BaseResponse, Movie } from "@/interfaces";
+  import { onMounted } from "vue";
   import BaseMoviesList from "@/views/movies/components/BaseMoviesList.vue";
-  import { useMoviesList } from "@/views/movies/composables/useMoviesList";
-  import { onBeforeMount } from "vue";
-  import { MoviesType } from "@/views/movies/enums/movies-type.enum";
 
-  const { items, loading, isOnLoadMore, type } = useMoviesList();
+  const { items, loading, isOnLoadMore, getItems } = useInfiniteScroll<BaseResponse<Movie>, Movie>('https://api.themoviedb.org/3/movie/upcoming?api_key=803a77b2748b6f5d6363b4fa92bfd870&language=en-US');
 
-  onBeforeMount(() => type(MoviesType.UPCOMING));
+  onMounted(() => getItems())
 </script>
